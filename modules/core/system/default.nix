@@ -1,0 +1,22 @@
+{
+  imports = [
+    ./audio.nix
+    ./bluetooth.nix
+    ./boot.nix
+    ./docker.nix
+    ./fonts.nix
+    ./fuse.nix
+    ./gnupg.nix
+    ./graphics.nix
+    ./locale.nix
+    ./network.nix
+    ./nix-ld.nix
+    ./nix.nix
+    ./nixpkgs.nix
+    ./openssh.nix
+    ./printing.nix
+    ./sudo.nix
+    ./users.nix
+    ./xserver.nix
+  ];
+}

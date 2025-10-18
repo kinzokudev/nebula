@@ -1,0 +1,24 @@
+{
+  imports = [
+    ./firefox.nix
+    ./feishin.nix
+    ./gimp.nix
+    ./keyd.nix
+    ./libreoffice.nix
+    ./lumafly.nix
+    ./mullvad.nix
+    ./niri.nix
+    ./obsidian.nix
+    ./osu.nix
+    ./plasma.nix
+    ./prismlauncher.nix
+    ./qbittorrent.nix
+    ./r2modman.nix
+    ./sddm.nix
+    ./signal.nix
+    ./steam.nix
+    ./thunderbird.nix
+    ./vlc.nix
+    ./vms.nix
+  ];
+}

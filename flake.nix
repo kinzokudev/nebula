@@ -153,23 +153,44 @@
         formatting = treefmtEval.${pkgs.system}.config.build.check self;
       });
 
-      nixosConfigurations = {
-        "NOVA" = lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = {
-            inherit
-              inputs
-              outputs
-              userinfo
-              ;
-            hostname = "NOVA";
-          };
-          modules = [
-            inputs.nix-flatpak.nixosModules.nix-flatpak
-            ./nova
-            # (lib.mkAliasOptionModule [ "hm" ] [ "home-manager" "users" userinfo.name ])
-          ];
+      nixosConfigurations =
+        let
+          mkSystem =
+            hostname: system:
+            lib.nixosSystem {
+              inherit system;
+              specialArgs = {
+                inherit
+                  inputs
+                  outputs
+                  userinfo
+                  hostname
+                  ;
+              };
+              modules = [
+                ./hosts/${lib.toLower hostname}
+                ./modules
+                (lib.mkAliasOptionModule [ "hm" ] [ "home-manager" "users" userinfo.name ])
+              ];
+            };
+        in
+        {
+          # "NOVA" = lib.nixosSystem {
+          #   system = "x86_64-linux";
+          #   specialArgs = {
+          #     inherit
+          #       inputs
+          #       outputs
+          #       userinfo
+          #       ;
+          #     hostname = "NOVA";
+          #   };
+          #   modules = [
+          #     ./nova
+          #     (lib.mkAliasOptionModule [ "hm" ] [ "home-manager" "users" userinfo.name ])
+          #   ];
+          # };
+          "NOVA" = mkSystem "NOVA" "x86_64-linux";
         };
-      };
     };
 }
