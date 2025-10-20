@@ -2,8 +2,7 @@
   config,
   lib,
   ...
-}:
-{
+}: {
   options.custom = {
     waybar = {
       enable = lib.mkEnableOption "waybar";
@@ -21,7 +20,7 @@
           margin-right = 4;
           spacing = 0;
 
-          modules-left = [ "niri/workspaces" ];
+          modules-left = ["niri/workspaces"];
 
           "niri/workspaces" = {
             format = "{icon}";
@@ -32,36 +31,34 @@
           };
         };
       };
-      style =
-        let
-          base = "303446";
-          mantle = "292c3c";
-          text = "c6d0f5";
-        in
-        ''
-          * {
-            border: none;
-            font-family: JetBrainsMono Nerd Font, monospace;
-            font-size: 14px;
-          }
+      style = let
+        base = "303446";
+        mantle = "292c3c";
+        text = "c6d0f5";
+      in ''
+        * {
+          border: none;
+          font-family: JetBrainsMono Nerd Font, monospace;
+          font-size: 14px;
+        }
 
-          window#waybar {
-            background-color: #${mantle};
-            color: #${text};
-          }
+        window#waybar {
+          background-color: #${mantle};
+          color: #${text};
+        }
 
-          #workspaces {
-            background-color: #${base};
-          }
+        #workspaces {
+          background-color: #${base};
+        }
 
-          #workspaces button {
-            color: #${text};
-          }
+        #workspaces button {
+          color: #${text};
+        }
 
-          #workspaces button.focused {
-            color: #ba93ff;
-          }
-        '';
+        #workspaces button.focused {
+          color: #ba93ff;
+        }
+      '';
     };
   };
 }

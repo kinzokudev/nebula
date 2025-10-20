@@ -2,8 +2,7 @@
   config,
   lib,
   ...
-}:
-{
+}: {
   options.custom = {
     atuin = {
       enable = lib.mkEnableOption "atuin";

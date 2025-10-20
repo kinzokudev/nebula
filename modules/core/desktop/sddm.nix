@@ -2,13 +2,14 @@
   config,
   lib,
   ...
-}:
-{
+}: {
   options.custom = {
     sddm = {
-      enable = lib.mkEnableOption "SDDM" // {
-        default = true;
-      };
+      enable =
+        lib.mkEnableOption "SDDM"
+        // {
+          default = true;
+        };
     };
   };
   config = lib.mkIf config.custom.sddm.enable {

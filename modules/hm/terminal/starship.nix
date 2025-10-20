@@ -2,13 +2,14 @@
   config,
   lib,
   ...
-}:
-{
+}: {
   options.custom = {
     starship = {
-      enable = lib.mkEnableOption "starship" // {
-        default = true;
-      };
+      enable =
+        lib.mkEnableOption "starship"
+        // {
+          default = true;
+        };
     };
   };
   config = lib.mkIf config.custom.starship.enable {

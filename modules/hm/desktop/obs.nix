@@ -2,8 +2,7 @@
   config,
   lib,
   ...
-}:
-{
+}: {
   options.custom = {
     obs = {
       enable = lib.mkEnableOption "OBS";

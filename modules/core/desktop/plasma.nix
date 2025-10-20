@@ -2,13 +2,14 @@
   config,
   lib,
   ...
-}:
-{
+}: {
   options.custom = {
     plasma = {
-      enable = lib.mkEnableOption "Plasma" // {
-        default = true;
-      };
+      enable =
+        lib.mkEnableOption "Plasma"
+        // {
+          default = true;
+        };
     };
   };
   config = lib.mkIf config.custom.plasma.enable {

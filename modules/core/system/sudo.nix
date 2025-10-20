@@ -3,8 +3,7 @@
   lib,
   userinfo,
   ...
-}:
-{
+}: {
   options.custom = {
     sudo = {
       passwordless = lib.mkEnableOption "passwordless sudo";
@@ -14,7 +13,7 @@
     security.sudo = {
       extraRules = [
         {
-          users = [ "${userinfo.name}" ];
+          users = ["${userinfo.name}"];
           commands = [
             {
               command = "ALL";

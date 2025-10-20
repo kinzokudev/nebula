@@ -3,8 +3,7 @@
   lib,
   pkgs,
   ...
-}:
-{
+}: {
   options.custom = {
     feishin = {
       enable = lib.mkEnableOption "Feishin";

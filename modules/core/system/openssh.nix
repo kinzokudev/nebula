@@ -2,13 +2,14 @@
   config,
   lib,
   ...
-}:
-{
+}: {
   options.custom = {
     ssh = {
-      enable = lib.mkEnableOption "SSH" // {
-        default = true;
-      };
+      enable =
+        lib.mkEnableOption "SSH"
+        // {
+          default = true;
+        };
     };
   };
   config = lib.mkIf config.custom.ssh.enable {

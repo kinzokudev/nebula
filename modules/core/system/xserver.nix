@@ -2,13 +2,14 @@
   config,
   lib,
   ...
-}:
-{
+}: {
   options.custom = {
     xserver = {
-      enable = lib.mkEnableOption "xserver" // {
-        default = true;
-      };
+      enable =
+        lib.mkEnableOption "xserver"
+        // {
+          default = true;
+        };
     };
   };
   config = lib.mkIf config.custom.xserver.enable {

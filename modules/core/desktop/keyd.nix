@@ -2,8 +2,7 @@
   config,
   lib,
   ...
-}:
-{
+}: {
   options.custom = {
     keyd = {
       enable = lib.mkEnableOption "keyd";
@@ -15,7 +14,7 @@
       enable = true;
       keyboards = {
         default = {
-          ids = [ "*" ];
+          ids = ["*"];
           settings = {
             main = {
               capslock = "overload(symbols, esc)";

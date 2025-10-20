@@ -3,8 +3,7 @@
   lib,
   pkgs,
   ...
-}:
-{
+}: {
   options.custom = {
     obsidian = {
       enable = lib.mkEnableOption "Obsidian";

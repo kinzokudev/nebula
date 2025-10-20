@@ -2,8 +2,7 @@
   config,
   lib,
   ...
-}:
-{
+}: {
   options.custom = {
     bootloader = lib.mkOption {
       type = lib.types.enum [

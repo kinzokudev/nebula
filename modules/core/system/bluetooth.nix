@@ -2,13 +2,14 @@
   config,
   lib,
   ...
-}:
-{
+}: {
   options.custom = {
     bluetooth = {
-      enable = lib.mkEnableOption "bluetooth" // {
-        default = true;
-      };
+      enable =
+        lib.mkEnableOption "bluetooth"
+        // {
+          default = true;
+        };
     };
   };
   config = lib.mkIf config.custom.bluetooth.enable {

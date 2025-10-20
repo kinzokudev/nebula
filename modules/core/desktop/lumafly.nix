@@ -3,8 +3,7 @@
   lib,
   pkgs,
   ...
-}:
-{
+}: {
   options.custom = {
     lumafly = {
       enable = lib.mkEnableOption "Lumafly";

@@ -3,13 +3,14 @@
   config,
   lib,
   ...
-}:
-{
+}: {
   options.custom = {
     tmux = {
-      enable = lib.mkEnableOption "tmux" // {
-        default = true;
-      };
+      enable =
+        lib.mkEnableOption "tmux"
+        // {
+          default = true;
+        };
     };
   };
   config = lib.mkIf config.custom.tmux.enable {

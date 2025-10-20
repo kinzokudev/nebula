@@ -3,19 +3,20 @@
   config,
   lib,
   ...
-}:
-{
+}: {
   options.custom = {
     kitty = {
-      enable = lib.mkEnableOption "kitty" // {
-        default = true;
-      };
+      enable =
+        lib.mkEnableOption "kitty"
+        // {
+          default = true;
+        };
     };
   };
   config = lib.mkIf config.custom.kitty.enable {
     programs.kitty = {
       enable = true;
-      environment = { };
+      environment = {};
       font = {
         name = "JetBrains Mono Nerd Font";
         package = pkgs.nerd-fonts.jetbrains-mono;

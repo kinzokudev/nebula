@@ -4,8 +4,7 @@
   pkgs,
   inputs,
   ...
-}:
-{
+}: {
   options.custom = {
     steam = {
       enable = lib.mkEnableOption "Steam";
@@ -24,7 +23,7 @@
         dedicatedServer.openFirewall = true;
         gamescopeSession.enable = true; # Enable GameScope session
         platformOptimizations.enable = true; # Enable platform optimizations from nix-gaming
-        extraCompatPackages = with pkgs; [ proton-ge-bin ]; # Add ProtonGE
+        extraCompatPackages = with pkgs; [proton-ge-bin]; # Add ProtonGE
       };
       # Enable GameMode to optimize system performance on demand
       gamemode.enable = true;
@@ -35,8 +34,8 @@
         packageOverrides = pkgs: {
           # Fix for Steam
           steam = pkgs.steam.override {
-            extraPkgs =
-              pkgs: with pkgs; [
+            extraPkgs = pkgs:
+              with pkgs; [
                 xorg.libXcursor
                 xorg.libXi
                 xorg.libXinerama
@@ -55,12 +54,8 @@
         # Fix for Steam
         (_final: prev: {
           steam = prev.steam.override (
-            {
-              extraLibraries ? _pkgs': [ ],
-              ...
-            }:
-            {
-              extraLibraries = pkgs': (extraLibraries pkgs') ++ [ pkgs'.gperftools ];
+            {extraLibraries ? _pkgs': [], ...}: {
+              extraLibraries = pkgs': (extraLibraries pkgs') ++ [pkgs'.gperftools];
             }
           );
         })

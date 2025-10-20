@@ -3,8 +3,7 @@
   lib,
   pkgs,
   ...
-}:
-{
+}: {
   options.custom = {
     signal = {
       enable = lib.mkEnableOption "Signal";

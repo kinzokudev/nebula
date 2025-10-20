@@ -4,8 +4,7 @@
   lib,
   pkgs,
   ...
-}:
-{
+}: {
   imports = [
     inputs.niri.homeModules.niri
   ];
@@ -76,63 +75,54 @@
 
           spawn-at-startup =
             lib.map
-              (cmd: {
-                command = [
-                  "sh"
-                  "-c"
-                  cmd
-                ];
-              })
-              [
-                "systemctl --user reset-failed waybar.service"
-                "systemctl --user restart waybar.service"
+            (cmd: {
+              command = [
+                "sh"
+                "-c"
+                cmd
               ];
+            })
+            [
+              "systemctl --user reset-failed waybar.service"
+              "systemctl --user restart waybar.service"
+            ];
 
-          binds =
-            with config.lib.niri.actions;
-            let
-              sh = spawn "sh" "-c";
-              bindings =
-                {
-                  suffixes,
-                  prefixes,
-                  substitutions ? { },
-                }:
-                let
-                  replacer = lib.replaceStrings (lib.attrNames substitutions) (lib.attrValues substitutions);
-                  format =
-                    prefix: suffix:
-                    let
-                      actual-suffix =
-                        if lib.isList suffix.action then
-                          {
-                            action = lib.head suffix.action;
-                            args = lib.tail suffix.action;
-                          }
-                        else
-                          {
-                            inherit (suffix) action;
-                            args = [ ];
-                          };
+          binds = with config.lib.niri.actions; let
+            sh = spawn "sh" "-c";
+            bindings = {
+              suffixes,
+              prefixes,
+              substitutions ? {},
+            }: let
+              replacer = lib.replaceStrings (lib.attrNames substitutions) (lib.attrValues substitutions);
+              format = prefix: suffix: let
+                actual-suffix =
+                  if lib.isList suffix.action
+                  then {
+                    action = lib.head suffix.action;
+                    args = lib.tail suffix.action;
+                  }
+                  else {
+                    inherit (suffix) action;
+                    args = [];
+                  };
 
-                      action = replacer "${prefix.action}-${actual-suffix.action}";
-                    in
-                    {
-                      name = "${prefix.key}+${suffix.key}";
-                      value.action.${action} = actual-suffix.args;
-                    };
-                  pairs =
-                    attrs: fn:
-                    lib.concatMap (
-                      key:
-                      fn {
-                        inherit key;
-                        action = attrs.${key};
-                      }
-                    ) (lib.attrNames attrs);
-                in
-                lib.listToAttrs (pairs prefixes (prefix: pairs suffixes (suffix: [ (format prefix suffix) ])));
+                action = replacer "${prefix.action}-${actual-suffix.action}";
+              in {
+                name = "${prefix.key}+${suffix.key}";
+                value.action.${action} = actual-suffix.args;
+              };
+              pairs = attrs: fn:
+                lib.concatMap (
+                  key:
+                    fn {
+                      inherit key;
+                      action = attrs.${key};
+                    }
+                ) (lib.attrNames attrs);
             in
+              lib.listToAttrs (pairs prefixes (prefix: pairs suffixes (suffix: [(format prefix suffix)])));
+          in
             lib.attrsets.mergeAttrsList [
               {
                 "Mod+P".action = spawn "fuzzel";
@@ -245,7 +235,6 @@
     };
   };
 }
-
 # {
 #   pkgs,
 #   inputs,
@@ -274,3 +263,4 @@
 #     };
 #   };
 # }
+

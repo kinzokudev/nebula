@@ -3,8 +3,7 @@
   lib,
   pkgs,
   ...
-}:
-{
+}: {
   options.custom = {
     vlc = {
       enable = lib.mkEnableOption "VLC";

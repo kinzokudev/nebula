@@ -2,8 +2,7 @@
   config,
   lib,
   ...
-}:
-{
+}: {
   options.custom = {
     gnupg = {
       enable = lib.mkEnableOption "GnuPG";

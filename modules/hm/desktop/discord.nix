@@ -4,9 +4,8 @@
   pkgs,
   inputs,
   ...
-}:
-{
-  imports = [ inputs.nixcord.homeModules.nixcord ];
+}: {
+  imports = [inputs.nixcord.homeModules.nixcord];
   options.custom = {
     discord = {
       enable = lib.mkEnableOption "Discord";

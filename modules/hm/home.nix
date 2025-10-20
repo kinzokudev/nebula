@@ -1,9 +1,4 @@
-{
-  userinfo,
-  ...
-}:
-
-{
+{userinfo, ...}: {
   home = {
     username = "${userinfo.name}";
     homeDirectory = "/home/${userinfo.name}";

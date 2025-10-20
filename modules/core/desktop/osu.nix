@@ -3,8 +3,7 @@
   lib,
   pkgs,
   ...
-}:
-{
+}: {
   options.custom = {
     osu = {
       enable = lib.mkEnableOption "Osu";

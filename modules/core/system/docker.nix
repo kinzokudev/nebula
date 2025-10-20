@@ -2,8 +2,7 @@
   config,
   lib,
   ...
-}:
-{
+}: {
   options.custom = {
     docker = {
       enable = lib.mkEnableOption "Docker";

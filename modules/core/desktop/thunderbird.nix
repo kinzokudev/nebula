@@ -3,8 +3,7 @@
   lib,
   pkgs,
   ...
-}:
-{
+}: {
   options.custom = {
     thunderbird = {
       enable = lib.mkEnableOption "Thunderbird";

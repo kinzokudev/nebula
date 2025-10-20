@@ -3,13 +3,14 @@
   config,
   lib,
   ...
-}:
-{
+}: {
   options.custom = {
     fish = {
-      enable = lib.mkEnableOption "fish" // {
-        default = true;
-      };
+      enable =
+        lib.mkEnableOption "fish"
+        // {
+          default = true;
+        };
     };
   };
   config = lib.mkIf config.custom.fish.enable {
@@ -26,22 +27,20 @@
         set fish_greeting
         fish_vi_key_bindings
       '';
-      shellInit =
-        let
-          homedir = config.home.homeDirectory;
-        in
-        ''
-          set -gx VISUAL nvim
-          set -gx EDITOR nvim
-          set -gx GOPATH ${homedir}/.go
-          set -gx PY_COLORS true
-          set -gx GPG_TTY (tty)
-          set -gx LANG en_US.utf-8
+      shellInit = let
+        homedir = config.home.homeDirectory;
+      in ''
+        set -gx VISUAL nvim
+        set -gx EDITOR nvim
+        set -gx GOPATH ${homedir}/.go
+        set -gx PY_COLORS true
+        set -gx GPG_TTY (tty)
+        set -gx LANG en_US.utf-8
 
-          fish_add_path ${homedir}/.local/bin
-          fish_add_path ${homedir}/.cargo/bin
-          fish_add_path ${homedir}/.go/bin
-        '';
+        fish_add_path ${homedir}/.local/bin
+        fish_add_path ${homedir}/.cargo/bin
+        fish_add_path ${homedir}/.go/bin
+      '';
       plugins = [
         {
           name = "fish-ssh-agent";

@@ -3,13 +3,14 @@
   config,
   lib,
   ...
-}:
-{
+}: {
   options.custom = {
     audio = {
-      enable = lib.mkEnableOption "audio" // {
-        default = true;
-      };
+      enable =
+        lib.mkEnableOption "audio"
+        // {
+          default = true;
+        };
     };
     noisetorch = {
       enable = lib.mkEnableOption "NoiseTorch";

@@ -2,8 +2,7 @@
   config,
   lib,
   ...
-}:
-{
+}: {
   options.custom = {
     direnv = {
       enable = lib.mkEnableOption "direnv";
@@ -28,5 +27,4 @@
       };
     };
   };
-
 }

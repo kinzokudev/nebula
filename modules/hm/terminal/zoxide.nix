@@ -2,13 +2,14 @@
   config,
   lib,
   ...
-}:
-{
+}: {
   options.custom = {
     zoxide = {
-      enable = lib.mkEnableOption "zoxide" // {
-        default = true;
-      };
+      enable =
+        lib.mkEnableOption "zoxide"
+        // {
+          default = true;
+        };
     };
   };
 

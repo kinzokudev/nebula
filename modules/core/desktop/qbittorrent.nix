@@ -3,8 +3,7 @@
   lib,
   pkgs,
   ...
-}:
-{
+}: {
   options.custom = {
     qbittorrent = {
       enable = lib.mkEnableOption "qBittorrent";

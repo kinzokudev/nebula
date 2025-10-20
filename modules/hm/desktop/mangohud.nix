@@ -2,8 +2,7 @@
   config,
   lib,
   ...
-}:
-{
+}: {
   options.custom = {
     mangohud = {
       enable = lib.mkEnableOption "mangohud";

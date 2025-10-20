@@ -3,8 +3,7 @@
   lib,
   pkgs,
   ...
-}:
-{
+}: {
   options.custom = {
     prismlauncher = {
       enable = lib.mkEnableOption "Prism Launcher";

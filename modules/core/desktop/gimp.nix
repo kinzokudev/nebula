@@ -3,8 +3,7 @@
   lib,
   pkgs,
   ...
-}:
-{
+}: {
   options.custom = {
     gimp = {
       enable = lib.mkEnableOption "GIMP";

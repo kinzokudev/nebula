@@ -3,13 +3,14 @@
   lib,
   pkgs,
   ...
-}:
-{
+}: {
   options.custom = {
     bat = {
-      enable = lib.mkEnableOption "bat" // {
-        default = true;
-      };
+      enable =
+        lib.mkEnableOption "bat"
+        // {
+          default = true;
+        };
     };
   };
 
@@ -24,6 +25,5 @@
         --style plain
       '';
     };
-
   };
 }

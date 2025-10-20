@@ -4,8 +4,7 @@
   pkgs,
   userinfo,
   ...
-}:
-{
+}: {
   options.custom = {
     vms = {
       enable = lib.mkEnableOption "virtual machines";

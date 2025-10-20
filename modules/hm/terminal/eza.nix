@@ -2,13 +2,14 @@
   config,
   lib,
   ...
-}:
-{
+}: {
   options.custom = {
     eza = {
-      enable = lib.mkEnableOption "eza" // {
-        default = true;
-      };
+      enable =
+        lib.mkEnableOption "eza"
+        // {
+          default = true;
+        };
     };
   };
   config = lib.mkIf config.custom.eza.enable {

@@ -3,8 +3,7 @@
   lib,
   pkgs,
   ...
-}:
-{
+}: {
   options.custom = {
     r2modman = {
       enable = lib.mkEnableOption "r2modman";

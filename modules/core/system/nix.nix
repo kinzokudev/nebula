@@ -1,5 +1,4 @@
-{ inputs, ... }:
-{
+{inputs, ...}: {
   # Configure nix
   nix = {
     settings = {

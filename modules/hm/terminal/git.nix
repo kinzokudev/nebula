@@ -3,29 +3,29 @@
   config,
   lib,
   ...
-}:
-{
+}: {
   options.custom = {
     git = {
-      enable = lib.mkEnableOption "Git" // {
-        default = true;
-      };
+      enable =
+        lib.mkEnableOption "Git"
+        // {
+          default = true;
+        };
       dev = lib.mkEnableOption "Git for development";
     };
   };
 
   config = lib.mkIf config.custom.git.enable {
     home = {
-      packages =
-        with pkgs;
+      packages = with pkgs;
         [
           git
         ]
         ++ (
           with pkgs;
-          lib.lists.optionals config.custom.git.dev [
-            lazygit
-          ]
+            lib.lists.optionals config.custom.git.dev [
+              lazygit
+            ]
         );
       shellAliases = {
         ga = "git add .";

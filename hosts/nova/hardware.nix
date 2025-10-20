@@ -6,17 +6,15 @@
   lib,
   modulesPath,
   ...
-}:
-
-{
+}: {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
   boot = {
-    extraModulePackages = [ ];
-    supportedFilesystems = [ "ntfs" ];
-    kernelModules = [ "kvm-amd" ];
+    extraModulePackages = [];
+    supportedFilesystems = ["ntfs"];
+    kernelModules = ["kvm-amd"];
     initrd = {
       availableKernelModules = [
         "xhci_pci"
@@ -26,7 +24,7 @@
         "usb_storage"
         "sd_mod"
       ];
-      kernelModules = [ "amdgpu" ];
+      kernelModules = ["amdgpu"];
     };
   };
   fileSystems = {

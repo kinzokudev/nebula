@@ -2,13 +2,14 @@
   config,
   lib,
   ...
-}:
-{
+}: {
   options.custom = {
     gpu = {
-      enable = lib.mkEnableOption "GPU" // {
-        default = true;
-      };
+      enable =
+        lib.mkEnableOption "GPU"
+        // {
+          default = true;
+        };
       vendor = lib.mkOption {
         type = lib.types.enum [
           "amd"
@@ -94,17 +95,18 @@
       };
     };
 
-    services.xserver.videoDrivers = [
-      "${lib.optionalString (config.custom.gpu.vendor == "nvidia") "nvidia"}" # Enable Nvidia GPU drivers if GPU vendor is Nvidia
-      "${lib.optionalString (config.custom.gpu.vendor == "amd") "amdgpu"}" # Enable AMD GPU drivers if GPU vendor is AMD
-    ]
-    # Extra drivers if Nvidia Optimus PRIME is enabled
-    ++ (lib.lists.optionals config.custom.gpu.prime.enable [
-      "${lib.optionalString (config.custom.gpu.prime.mode == "offload") "modesetting"}" # Enable Modesetting driver if PRIME mode is set to Offload
-      # Enable AMD GPU driver if PRIME mode is set to Offload and CPU vendor is AMD
-      "${lib.optionalString (
-        config.custom.gpu.prime.mode == "offload" && config.custom.gpu.prime.cpuVendor == "amd"
-      ) "amdgpu"}"
-    ]);
+    services.xserver.videoDrivers =
+      [
+        "${lib.optionalString (config.custom.gpu.vendor == "nvidia") "nvidia"}" # Enable Nvidia GPU drivers if GPU vendor is Nvidia
+        "${lib.optionalString (config.custom.gpu.vendor == "amd") "amdgpu"}" # Enable AMD GPU drivers if GPU vendor is AMD
+      ]
+      # Extra drivers if Nvidia Optimus PRIME is enabled
+      ++ (lib.lists.optionals config.custom.gpu.prime.enable [
+        "${lib.optionalString (config.custom.gpu.prime.mode == "offload") "modesetting"}" # Enable Modesetting driver if PRIME mode is set to Offload
+        # Enable AMD GPU driver if PRIME mode is set to Offload and CPU vendor is AMD
+        "${lib.optionalString (
+          config.custom.gpu.prime.mode == "offload" && config.custom.gpu.prime.cpuVendor == "amd"
+        ) "amdgpu"}"
+      ]);
   };
 }

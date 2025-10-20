@@ -3,8 +3,7 @@
   lib,
   pkgs,
   ...
-}:
-{
+}: {
   options.custom = {
     chromium = {
       enable = lib.mkEnableOption "chromium";
