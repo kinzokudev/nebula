@@ -54,7 +54,6 @@
           just # Project command runner
           openssl # Cryptographic library that implements the SSL and TLS protocols
           pkg-config # Tool that allows packages to find out information about other packages
-          twingate # Client for Twingate ZTNA platform
 
           gcc # GNU C compiler
           python3 # Python language v3
@@ -73,6 +72,7 @@
         lib.lists.optionals config.custom.cli.network [
           nfs-utils # NFS utilities
           sshfs # Allows remote filesystems to be mounted over SSH
+          twingate # Client for Twingate ZTNA platform
         ]
       );
   };
