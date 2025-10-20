@@ -12,7 +12,6 @@
     sudo.passwordless = true;
     cli = {
       dev = true;
-      lsp = true;
     };
     gpu = {
       enable = true;
