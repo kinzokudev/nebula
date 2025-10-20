@@ -78,5 +78,10 @@
           twingate # Client for Twingate ZTNA platform
         ]
       );
+    hm.xdg.configFile = {
+      "defaultconfigs/.prettierrc.json" = lib.mkIf config.custom.cli.dev {
+        source = ./default_prettierrc.json;
+      };
+    };
   };
 }
