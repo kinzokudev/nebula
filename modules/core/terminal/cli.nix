@@ -32,11 +32,11 @@
       ++ (
         with pkgs;
         lib.lists.optionals config.custom.cli.dev [
-          nixfmt # Nix formatter (formerly nixfmt-rfc-style)
           stylua # Lua formatter
           lua-language-server # Lua langserver
           statix # Nix linter
           deadnix # Nix tool that scans for unused code
+          alejandra # Nix formatter
           nixd # Nix langserver
           markdownlint-cli # Markdown linter
           mdformat # Markdown formatter
