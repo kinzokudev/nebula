@@ -49,6 +49,8 @@
           vscode-langservers-extracted # HTML/CSS/JSON/ESLint langservers from VSCode
           typescript-language-server # TypeScript langserver
           treefmt # Unified CLI tool for running multiple code formatters on the full source tree
+
+          glow # CLI Markdown viewer
           ripgrep # Line-oriented CLI search tool that recursively searches the CWD for a regex pattern
           unzip # Extracts .zip archives
           just # Project command runner
