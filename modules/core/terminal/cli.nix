@@ -51,6 +51,7 @@
           treefmt # Unified CLI tool for running multiple code formatters on the full source tree
 
           glow # CLI Markdown viewer
+          go-grip # Tool that lets you view Markdown files locally in your browser with GitHub style rendering
           ripgrep # Line-oriented CLI search tool that recursively searches the CWD for a regex pattern
           unzip # Extracts .zip archives
           just # Project command runner
