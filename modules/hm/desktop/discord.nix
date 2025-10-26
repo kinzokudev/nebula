@@ -23,44 +23,46 @@
     };
     programs.nixcord = {
       enable = true;
-      discord = {
-        enable = true;
-        vencord = {
-          enable = false;
-          package = pkgs.vencord;
-        };
-        openASAR.enable = false;
-        package = pkgs.discord-canary;
-      };
+      # discord = {
+      #   enable = true;
+      #   vencord = {
+      #     enable = false;
+      #     package = pkgs.vencord;
+      #   };
+      #   openASAR.enable = false;
+      #   package = pkgs.discord-canary;
+      # };
       vesktop = {
         enable = true;
-        package = pkgs.vesktop.overrideAttrs {
-          desktopItems = [
-            (pkgs.makeDesktopItem {
-              name = "vesktop";
-              desktopName = "Discord";
-              exec = "vesktop --enable-features=VaapiIgnoreDriverChecks,VaapiVideoEncoder,VaapiVideoDecoder,CanvasOopRasterization,UseMultiPlaneFormatForHardwareVideo,MiddleClickAutoscroll,UseOzonePlatform --ozone-platform=wayland";
-              icon = "discord";
-              startupWMClass = "VencordDesktop";
-              genericName = "Internet Messenger";
-              keywords = [
-                "discord"
-                "vencord"
-                "electron"
-                "chat"
-              ];
-              categories = [
-                "Network"
-                "InstantMessaging"
-                "Chat"
-              ];
-            })
-          ];
-        };
+        # package = pkgs.vesktop.overrideAttrs {
+        #   desktopItems = [
+        #     (pkgs.makeDesktopItem {
+        #       name = "vesktop";
+        #       desktopName = "Discord";
+        #       exec = "vesktop --enable-features=VaapiIgnoreDriverChecks,VaapiVideoEncoder,VaapiVideoDecoder,CanvasOopRasterization,UseMultiPlaneFormatForHardwareVideo,MiddleClickAutoscroll,UseOzonePlatform --ozone-platform=wayland";
+        #       icon = "discord";
+        #       startupWMClass = "VencordDesktop";
+        #       genericName = "Internet Messenger";
+        #       keywords = [
+        #         "discord"
+        #         "vencord"
+        #         "electron"
+        #         "chat"
+        #       ];
+        #       categories = [
+        #         "Network"
+        #         "InstantMessaging"
+        #         "Chat"
+        #       ];
+        #     })
+        #   ];
+        # };
+        package = pkgs.vesktop;
       };
       config = {
         themeLinks = [
-          "https://raw.githubusercontent.com/ardishco-the-great/catpuccin-discord/main/themes/frappe.theme.css"
+          # "https://raw.githubusercontent.com/ardishco-the-great/catpuccin-discord/main/themes/frappe.theme.css"
+          "https://raw.githubusercontent.com/catppuccin/discord/main/themes/frappe.theme.css"
         ];
         frameless = false;
         plugins = {
@@ -75,14 +77,13 @@
           # };
           betterGifAltText.enable = true;
           betterGifPicker.enable = true;
-          betterNotesBox.enable = true;
           betterRoleDot.enable = true;
           betterUploadButton.enable = true;
           blurNSFW.enable = true;
           # callTimer.enable = true;
           clearURLs.enable = true;
           crashHandler.enable = true;
-          dearrow.enable = true;
+          # dearrow.enable = true;
           experiments.enable = true;
           fakeNitro.enable = true;
           favoriteEmojiFirst.enable = true;
