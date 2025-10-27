@@ -30,6 +30,7 @@
     gimp.enable = true;
     vlc.enable = true;
     audacity.enable = true;
+    patchance.enable = true;
     qbittorrent.enable = true;
     firefox.enable = true;
     gnupg.enable = true;
