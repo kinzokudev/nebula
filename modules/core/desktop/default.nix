@@ -1,5 +1,6 @@
 {
   imports = [
+    ./audacity.nix
     ./firefox.nix
     ./feishin.nix
     ./gimp.nix
