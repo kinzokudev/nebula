@@ -11,6 +11,7 @@
     ./niri.nix
     ./obsidian.nix
     ./osu.nix
+    ./patchance.nix
     ./plasma.nix
     ./prismlauncher.nix
     ./qbittorrent.nix
