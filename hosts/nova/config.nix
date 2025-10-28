@@ -37,6 +37,7 @@
     steam.enable = true;
     vms.enable = true;
     docker.enable = true;
+    noisetorch.enable = true;
   };
   hm.custom = {
     chromium.enable = true;
