@@ -72,6 +72,7 @@
         with pkgs;
           lib.lists.optionals config.custom.cli.network [
             nfs-utils # NFS utilities
+            cifs-utils # Samba utilities
             sshfs # Allows remote filesystems to be mounted over SSH
             twingate # Client for Twingate ZTNA platform
           ]
