@@ -8,6 +8,7 @@
   options.custom = {
     vms = {
       enable = lib.mkEnableOption "virtual machines";
+      virtio = lib.mkEnableOption "virtiofsd";
     };
   };
   config = lib.mkIf config.custom.vms.enable {
@@ -24,6 +25,9 @@
       onShutdown = "shutdown";
       qemu = {
         package = pkgs.qemu_kvm;
+        vhostUserPackages = lib.optionals config.custom.vms.virtio [
+          pkgs.virtiofsd
+        ];
       };
     };
     systemd.tmpfiles.rules = [
