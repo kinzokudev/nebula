@@ -37,7 +37,10 @@
     firefox.enable = true;
     gnupg.enable = true;
     steam.enable = true;
-    vms.enable = true;
+    vms = {
+      enable = true;
+      virtio = true;
+    };
     docker.enable = true;
     noisetorch.enable = true;
   };
