@@ -48,7 +48,7 @@
     chromium.enable = true;
     discord.enable = true;
     mangohud.enable = true;
-    niri.enable = true;
+    # niri.enable = true;
     obs.enable = true;
     waybar.enable = true;
     direnv.enable = true;
