@@ -109,13 +109,10 @@
             ignoreSelf = true;
           };
           messageTags.enable = true;
-          moreCommands.enable = true;
-          moreKaomoji.enable = true;
           mutualGroupDMs.enable = true;
           newGuildSettings.enable = true;
           noBlockedMessages = {
             enable = true;
-            ignoreBlockedMessages = true;
           };
           noDevtoolsWarning.enable = true;
           noF1.enable = true;
@@ -161,7 +158,7 @@
           voiceMessages.enable = true;
           volumeBooster = {
             enable = true;
-            multiplier = 5;
+            multiplier = 5.0;
           };
           webKeybinds.enable = true;
           webRichPresence.enable = true;
