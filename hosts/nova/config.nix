@@ -24,6 +24,7 @@
     signal.enable = true;
     feishin.enable = true;
     r2modman.enable = true;
+    reaper.enable = true;
     prismlauncher.enable = true;
     lumafly.enable = true;
     osu.enable = true;
