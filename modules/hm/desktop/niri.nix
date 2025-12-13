@@ -131,10 +131,9 @@
 
                 "Mod+Shift+C".action = close-window;
 
-                "Mod+Shift+S".action = screenshot;
-                "Mod+Print".action = screenshot-window;
-
                 "Mod+F".action = fullscreen-window;
+
+                "Mod+Shift+S".action = spawn "sh" "-c" ''grim -g "$(slurp)" - | wl-copy'';
 
                 "XF86AudioRaiseVolume".action = sh "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+";
                 "XF86AudioLowerVolume".action = sh "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-";
