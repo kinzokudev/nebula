@@ -17,6 +17,7 @@
     ./prismlauncher.nix
     ./qbittorrent.nix
     ./r2modman.nix
+    ./reaper.nix
     ./sddm.nix
     ./signal.nix
     ./steam.nix
