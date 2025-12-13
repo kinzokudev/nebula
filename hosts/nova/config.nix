@@ -29,6 +29,7 @@
     osu.enable = true;
     gimp.enable = true;
     vlc.enable = true;
+    appimagerun.enable = true;
     audacity.enable = true;
     patchance.enable = true;
     qbittorrent.enable = true;
