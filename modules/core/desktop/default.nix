@@ -1,5 +1,6 @@
 {
   imports = [
+    ./appimagerun.nix
     ./audacity.nix
     ./firefox.nix
     ./feishin.nix
