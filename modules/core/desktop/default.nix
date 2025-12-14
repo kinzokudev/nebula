@@ -5,6 +5,7 @@
     ./firefox.nix
     ./feishin.nix
     ./gimp.nix
+    ./inkscape.nix
     ./keyd.nix
     ./krita.nix
     ./libreoffice.nix
