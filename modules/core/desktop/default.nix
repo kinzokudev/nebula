@@ -6,6 +6,7 @@
     ./feishin.nix
     ./gimp.nix
     ./keyd.nix
+    ./krita.nix
     ./libreoffice.nix
     ./lumafly.nix
     ./mullvad.nix
