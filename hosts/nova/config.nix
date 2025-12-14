@@ -29,6 +29,8 @@
     lumafly.enable = true;
     osu.enable = true;
     gimp.enable = true;
+    krita.enable = true;
+    inkscape.enable = true;
     vlc.enable = true;
     appimagerun.enable = true;
     audacity.enable = true;
