@@ -5,5 +5,4 @@
     stateVersion = "24.11";
   };
   programs.home-manager.enable = true; # Let Home Manager install and manage itself.
-  nixpkgs.config.allowUnfree = true;
 }

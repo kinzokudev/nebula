@@ -1,0 +1,27 @@
+{
+  lib,
+  inputs,
+  outputs,
+  userinfo,
+  ...
+}: let
+  mkSystem = hostname:
+    lib.nixosSystem {
+      system = "x86_64-linux";
+      specialArgs = {
+        inherit
+          inputs
+          outputs
+          userinfo
+          hostname
+          ;
+      };
+      modules = [
+        ./hosts/${lib.toLower hostname}
+        ./modules
+        (lib.mkAliasOptionModule ["hm"] ["home-manager" "users" userinfo.name])
+      ];
+    };
+in {
+  "NOVA" = mkSystem "NOVA";
+}

@@ -1,0 +1,24 @@
+{
+  imports = [
+    ./niri
+    ./wm
+    ./audacity.nix
+    ./firefox.nix
+    ./feishin.nix
+    ./gimp.nix
+    ./inkscape.nix
+    ./krita.nix
+    ./libreoffice.nix
+    ./obsidian.nix
+    ./plasma.nix
+    ./prismlauncher.nix
+    ./qbittorrent.nix
+    ./r2modman.nix
+    ./lmms.nix
+    ./sddm.nix
+    ./signal.nix
+    ./steam.nix
+    ./thunderbird.nix
+    ./vlc.nix
+  ];
+}

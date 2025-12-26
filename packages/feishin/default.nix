@@ -11,13 +11,13 @@
   makeDesktopItem,
 }: let
   pname = "feishin";
-  version = "1.0.0-beta.10";
+  version = "1.0.2";
 
   src = fetchFromGitHub {
     owner = "jeffvli";
     repo = "feishin";
     tag = "v${version}";
-    hash = "sha256-6NCOHeEctiKQGlajJOSoGOOApoUM3ZXt/HyWzdNgqBk=";
+    hash = "sha256-otobV3bpANbhrAiscDxV1IGJ36i/37aPei6wdo5SDSw=";
   };
 
   electron = electron_38;
@@ -38,7 +38,7 @@ in
         src
         ;
       fetcherVersion = 2;
-      hash = "sha256-uRUql+jrZO/apmGNazjnIyGisufOLr5hAB9M/2q74i8=";
+      hash = "sha256-iZs2YtB0U8RpZXrIYHBc/cgFISDF/4tz+D13/+HlszU=";
     };
 
     env.ELECTRON_SKIP_BINARY_DOWNLOAD = "1";

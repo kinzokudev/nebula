@@ -79,9 +79,9 @@
           betterGifPicker.enable = true;
           betterRoleDot.enable = true;
           betterUploadButton.enable = true;
-          blurNSFW.enable = true;
+          # blurNSFW.enable = true;
           # callTimer.enable = true;
-          clearURLs.enable = true;
+          # clearURLs.enable = true;
           crashHandler.enable = true;
           # dearrow.enable = true;
           experiments.enable = true;
@@ -109,7 +109,7 @@
             ignoreSelf = true;
           };
           messageTags.enable = true;
-          mutualGroupDMs.enable = true;
+          # mutualGroupDMs.enable = true;
           newGuildSettings.enable = true;
           noBlockedMessages = {
             enable = true;
@@ -126,7 +126,7 @@
           openInApp.enable = true;
           permissionFreeWill.enable = true;
           pictureInPicture.enable = true;
-          pinDMs.enable = true;
+          # pinDMs.enable = true;
           plainFolderIcon.enable = true;
           platformIndicators.enable = true;
           previewMessage.enable = true;
