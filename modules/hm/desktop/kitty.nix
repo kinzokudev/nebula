@@ -18,11 +18,11 @@
       enable = true;
       environment = {};
       font = {
-        name = "JetBrains Mono Nerd Font";
+        name = "JetBrainsMono Nerd Font";
         package = pkgs.nerd-fonts.jetbrains-mono;
         size = 12;
       };
-      themeFile = "Catppuccin-Frappe";
+      themeFile = "Catppuccin-Macchiato";
       settings = {
         enable_audio_bell = false;
         window_padding_width = 2;
