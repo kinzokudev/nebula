@@ -26,6 +26,15 @@
       interactiveShellInit = ''
         set fish_greeting
         fish_vi_key_bindings
+
+        function yy
+          set -l tmp (mktemp -t "yazi-cwd.XXXXX")
+          command yazi $argv --cwd-file="$tmp"
+          if set cwd (cat -- "$tmp"); and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
+            builtin cd -- "$cwd"
+          end
+          rm -f -- "$tmp"
+        end
       '';
       shellInit = let
         homedir = config.home.homeDirectory;
