@@ -23,6 +23,7 @@
           userinfo
           hostname
           ;
+        flakedir = "/home/${userinfo.name}/Workspace/Dev/nebula-copy";
       };
       modules = [
         ./hosts/${lib.toLower hostname}
