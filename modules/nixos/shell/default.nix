@@ -1,0 +1,298 @@
+{
+  config,
+  lib,
+  pkgs,
+  flakedir,
+  ...
+}: let
+  inherit
+    (lib)
+    attrValues
+    concatMapAttrsStringSep
+    functionArgs
+    hiPrio
+    intersectAttrs
+    isDerivation
+    isString
+    mapAttrs
+    mkOption
+    optionalString
+    ;
+  inherit
+    (lib.types)
+    attrs
+    attrsOf
+    oneOf
+    package
+    str
+    ;
+
+  # writeShellApplication with support for completions
+  writeShellApplicationCompletions = {
+    name,
+    completions ? {},
+    ...
+  } @ shellArgs: let
+    inherit (pkgs) writeShellApplication writeText installShellFiles;
+    # get the needed arguments for writeShellApplication
+    app = writeShellApplication (intersectAttrs (functionArgs writeShellApplication) shellArgs);
+    completionsStr =
+      concatMapAttrsStringSep " " (
+        shell: content:
+          optionalString (builtins.elem shell [
+            "bash"
+            "zsh"
+            "fish"
+            "nushell"
+          ]) "--${shell} ${writeText "${shell}-completion" content}"
+      )
+      completions;
+  in
+    if completions == {}
+    then app
+    else
+      app.overrideAttrs (o: {
+        nativeBuildInputs = (o.nativeBuildInputs or []) ++ [installShellFiles];
+
+        buildCommand =
+          o.buildCommand
+          + ''
+            installShellCompletion --cmd ${name} ${completionsStr}
+          '';
+      });
+in {
+  options.custom = {
+    shell = {
+      packages = mkOption {
+        type = attrsOf (oneOf [
+          str
+          attrs
+          package
+        ]);
+        # produces an attrset shell package with completions from either a string / writeShellApplication attrset / package
+        apply = mapAttrs (
+          name: value:
+            if isString value
+            then
+              pkgs.writeShellApplication {
+                inherit name;
+                text = value;
+              }
+            # packages
+            else if isDerivation value
+            then value
+            # attrs to pass to writeShellApplication
+            else writeShellApplicationCompletions (value // {inherit name;})
+        );
+        default = {};
+        description = ''
+          Attrset of shell packages to install and add to pkgs.custom overlay (for compatibility across multiple shells).
+          Both string and attr values will be passed as arguments to writeShellApplicationCompletions
+        '';
+        example = ''
+          shell.packages = {
+            myPackage1 = "echo 'Hello, World!'";
+            myPackage2 = {
+              runtimeInputs = [ pkgs.hello ];
+              text = "hello --greeting 'Hi'";
+            };
+          }
+        '';
+      };
+    };
+  };
+
+  config = let
+    homeDir = config.hm.home.homeDirectory;
+    xdg-user-dirs = {
+      # xdg user dirs
+      XDG_DESKTOP_DIR = "${homeDir}/Desktop";
+      XDG_DOCUMENTS_DIR = "${homeDir}/Documents";
+      XDG_DOWNLOAD_DIR = "${homeDir}/Downloads";
+      XDG_MUSIC_DIR = "${homeDir}/Music";
+      XDG_PICTURES_DIR = "${homeDir}/Pictures";
+      XDG_PUBLICSHARE_DIR = "${homeDir}/Public";
+      XDG_TEMPLATES_DIR = "${homeDir}/Templates";
+      XDG_VIDEOS_DIR = "${homeDir}/Videos";
+    };
+  in {
+    environment = {
+      shellAliases = {
+        ":e" = "nvim";
+        ":q" = "exit";
+        ":wq" = "exit";
+        c = "clear";
+        cat = "bat";
+        ccat = "command cat";
+        cp = "cp -ri";
+        crate = "cargo";
+        flake = "cd ${flakedir}";
+        isodate = ''date -u "+%Y-%m-%dT%H:%M:%SZ"'';
+        man = "batman";
+        mime = "xdg-mime query filetype";
+        mkdir = "mkdir -p";
+        mount = "mount --mkdir";
+        open = "xdg-open";
+        py = "python";
+        sl = "ls";
+        w = "watch -cn1 -x cat";
+
+        # cd aliases
+        ".." = "cd ..";
+        "..." = "cd ../..";
+      };
+
+      systemPackages = with pkgs;
+        [
+          bonk # mkdir and touch in one
+          curl
+          # dysk # better disk info
+          ets # add timestamp to beginning of each line
+          fd # better find
+          fx # terminal json viewer and processor
+          gzip
+          htop
+          jq
+          killall
+          procs # better ps
+          (hiPrio procps) # for uptime
+          sd # better sed
+          trash-cli
+          ugrep # grep, with boolean query patterns, e.g. ug --files -e "A" --and "B"
+          xdg-utils
+        ]
+        # add custom user created shell packages
+        ++ (attrValues config.custom.shell.packages);
+      variables =
+        {
+          TERMINAL = "kitty";
+          EDITOR = "nvim";
+          VISUAL = "nvim";
+          NIXPKGS_ALLOW_UNFREE = "1";
+          # xdg
+          XDG_CACHE_HOME = config.hm.xdg.cacheHome;
+          XDG_CONFIG_HOME = config.hm.xdg.configHome;
+          XDG_DATA_HOME = config.hm.xdg.dataHome;
+          XDG_STATE_HOME = config.hm.xdg.stateHome;
+        }
+        // xdg-user-dirs;
+    };
+
+    hm.xdg.configFile = {
+      "user-dirs.conf".text = "enabled=False";
+      "user-dirs.dirs".text = let
+        # For some reason, these need to be wrapped with quotes to be valid.
+        wrapped = mapAttrs (_: value: ''"${value}"'') xdg-user-dirs;
+      in
+        lib.generators.toKeyValue {} wrapped;
+    };
+
+    nixpkgs = {
+      # add custom user created shell packages to pkgs.custom.shell
+      overlays = [
+        (_: prev: {
+          custom =
+            (prev.custom or {})
+            // {
+              shell = config.custom.shell.packages;
+            };
+        })
+      ];
+    };
+
+    custom.shell.packages = let
+      binariesCompletion = binaryName: {
+        completions.bash =
+          /*
+          sh
+          */
+          ''
+            _complete_path_binaries()
+            {
+                local cur prev words cword
+                _init_completion || return
+
+                local IFS=:
+                local binaries=()
+                for path in $PATH; do
+                    for bin in "$path"/*; do
+                        if [[ -x "$bin" && -f "$bin" ]]; then
+                            binaries+=("$(basename "$bin")")
+                        fi
+                    done
+                done
+
+                COMPREPLY=($(compgen -W "''${binaries[*]}" -- "$cur"))
+            }
+
+            complete -F _complete_path_binaries ${binaryName}
+          '';
+        completions.fish =
+          /*
+          fish
+          */
+          ''
+            function __complete_path_binaries
+                for path in $PATH
+                    for bin in $path/*
+                        if test -x $bin -a -f $bin
+                            set -l bin_name (basename $bin)
+                            echo $bin_name
+                        end
+                    end
+                end
+            end
+
+            complete -c ${binaryName} -f -a "(__complete_path_binaries)"
+          '';
+      };
+    in {
+      fdnix = {
+        runtimeInputs = [pkgs.fd];
+        text =
+          /*
+          sh
+          */
+          ''fd "$@" /nix/store'';
+      };
+      md =
+        /*
+        sh
+        */
+        ''[[ $# == 1 ]] && mkdir -p -- "$1" && cd -- "$1"'';
+      # improved which for nix
+      nwhich =
+        {
+          text =
+            /*
+            sh
+            */
+            ''readlink -f "$(which "$1")"'';
+        }
+        // binariesCompletion "nwhich";
+      cnwhich =
+        {
+          text =
+            /*
+            sh
+            */
+            ''cat "$(nwhich "$1")"'';
+        }
+        // binariesCompletion "cnwhich";
+      ynwhich =
+        {
+          runtimeInputs = with pkgs; [
+            custom.shell.nwhich
+          ];
+          text =
+            /*
+            sh
+            */
+            ''yazi "$(dirname "$(dirname "$(nwhich "$1")")")"'';
+        }
+        // binariesCompletion "ynwhich";
+      # uniq but maintain original order
+      uuniq = "awk '!x[$0]++'";
+    };
+  };
+}

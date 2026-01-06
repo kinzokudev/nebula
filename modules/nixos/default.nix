@@ -4,6 +4,7 @@
     ./gui
     ./hardware
     ./misc
+    ./shell
     ./terminal
   ];
 }
