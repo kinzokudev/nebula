@@ -4,6 +4,7 @@
   inputs,
   userinfo,
   config,
+  flakedir,
   # self,
   ...
 }: let
@@ -35,6 +36,25 @@ in {
       nfu = "nix flake update";
       nsh = "nix-shell --command fish -p";
       nshp = "nix-shell --pure --command fish -p";
+    };
+  };
+
+  custom.shell.packages = {
+    nv-update = {
+      runtimeInputs = [pkgs.nvfetcher];
+      text =
+        /*
+        sh
+        */
+        ''
+          pushd ${flakedir} > /dev/null
+          if [ "$#" -eq 0 ]; then
+            nvfetcher --keep-old
+          else
+            nvfetcher --keep-old --filter "$1"
+          fi
+          popd > /dev/null
+        '';
     };
   };
 
