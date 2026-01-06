@@ -2,9 +2,17 @@
   lib,
   inputs,
   outputs,
-  userinfo,
   ...
 }: let
+  userinfo = {
+    name = "kinzoku";
+    fullname = "Kira Rene";
+    email = "kin@kinzoku.dev";
+    timezone = "America/New_York";
+    handles = {
+      github = "kinzokudev";
+    };
+  };
   mkSystem = hostname:
     lib.nixosSystem {
       system = "x86_64-linux";

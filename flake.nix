@@ -34,20 +34,10 @@
   }: let
     inherit (self) outputs;
     lib = nixpkgs.lib // home-manager.lib;
-
-    userinfo = {
-      name = "kinzoku";
-      fullname = "Kira Rene";
-      email = "kin@kinzoku.dev";
-      timezone = "America/New_York";
-      handles = {
-        github = "kinzokudev";
-      };
-    };
   in {
     inherit lib;
     nixosConfigurations = import ./hosts.nix {
-      inherit lib inputs outputs userinfo;
+      inherit lib inputs outputs;
     };
   };
 }
