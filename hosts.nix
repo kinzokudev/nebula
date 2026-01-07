@@ -28,6 +28,7 @@
       modules = [
         ./hosts/${lib.toLower hostname}
         ./modules
+        ./overlays
         (lib.mkAliasOptionModule ["hm"] ["home-manager" "users" userinfo.name])
       ];
     };
