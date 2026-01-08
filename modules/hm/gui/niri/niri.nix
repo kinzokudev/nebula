@@ -154,7 +154,7 @@
           "Mod+Shift+P".spawn = ["rofi" "-show" "run" "-theme" "${config.xdg.configHome}/rofi/run.rasi"];
           "Mod+E".spawn = ["rofi" "-show" "emoji" "-theme" "${config.xdg.configHome}/rofi/emoji.rasi"];
           "Mod+Q".spawn = ["rofi" "-show" "calc" "-theme" "${config.xdg.configHome}/rofi/calc.rasi"];
-          "Mod+Shift+W".spawn = [];
+          "Mod+Shift+W".spawn = ["rofi" "-show" "window" "-theme" "${config.xdg.configHome}/rofi/window.rasi"];
           "Mod+Shift+Z".spawn = ["kitty" "pulsemixer"];
           "Mod+N".spawn = ["dunstctl" "history-pop"];
           "Mod+Shift+N".spawn = ["dunstctl" "close"];

@@ -655,6 +655,149 @@
         placeholder: "[OUTPUT...]";
       }
     '';
+    "rofi/window.rasi".text = ''
+      @import "globals"
+
+      window {
+        enabled: true;
+        width: 800px;
+        border-radius: 8px;
+        border: 2px solid;
+        border-color: @bd-color;
+        padding: 0px;
+        location: center;
+        anchor: center;
+        fullscreen: false;
+        x-offset: 0px;
+        y-offset: 0px;
+        margin: 0px;
+        cursor: "default";
+        background-color: @bg-color;
+      }
+      mainbox {
+        enabled: true;
+        spacing: 10px;
+        margin: 0px;
+        padding: 10px 8px;
+        background-color: transparent;
+        children: ["inputbar", "listview" ];
+      }
+      inputbar {
+        enabled: true;
+        spacing: 0px;
+        margin: 0px;
+        padding: 0px;
+        background-color: transparent;
+        text-color: @fg-color;
+        children: ["prompt",  "entry"];
+      }
+
+      prompt {
+        enabled: true;
+        background-color: inherit;
+        text-color: inherit;
+        font: "JetBrainsMono Nerd Font 24";
+        margin: 0px 0px 0px 8px;
+        padding: 0px;
+      }
+      entry {
+        enabled: true;
+        background-color: inherit;
+        text-color: inherit;
+        cursor: text;
+        placeholder: "[WINDOW SEARCH...]";
+        placeholder-color: @fg-subtle;
+        margin: 0px;
+        padding: 10px 0px;
+      }
+
+
+      listview {
+        enabled: true;
+        columns: 2;
+        lines: 10;
+        cycle: true;
+        dynamic: true;
+        scrollbar: true;
+        layout: vertical;
+        reverse: false;
+        fixed-height: true;
+        fixed-columns: false;
+
+        spacing: 5px;
+        margin: 0px;
+        padding: 0px;
+        background-color: transparent;
+        text-color: @fg-color;
+        cursor: "default";
+      }
+      scrollbar {
+        handle-width: 4px;
+        handle-color: @fg-special;
+        border-radius: 4px;
+        background-color: @bg-alt;
+      }
+      element {
+        enabled: true;
+        spacing: 10px;
+        margin: 0px;
+        padding: 5px 10px;
+        border-radius: 6px;
+        background-color: transparent;
+        text-color: @fg-color;
+        cursor: pointer;
+      }
+      element normal.normal {
+        background-color: @bg-color;
+        text-color: @fg-color;
+      }
+      element normal.urgent {
+        background-color: @bg-color;
+        text-color: @red;
+      }
+      element normal.active {
+        background-color: @bg-color;
+        text-color: @green;
+      }
+      element selected.normal {
+        background-color: @bg-alt;
+        text-color: @fg-color;
+      }
+      element selected.urgent {
+        background-color: @bg-alt;
+        text-color: @red;
+      }
+      element selected.active {
+        background-color: @bg-alt;
+        text-color: @green;
+      }
+      element alternate.normal {
+        background-color: @bg-color;
+        text-color: @fg-color;
+      }
+      element alternate.urgent {
+        background-color: @bg-color;
+        text-color: @red;
+      }
+      element alternate.active {
+        background-color: @bg-color;
+        text-color: @green;
+      }
+      element-icon {
+        background-color: transparent;
+        text-color: inherit;
+        size: 20px;
+        cursor: inherit;
+      }
+      element-text {
+        background-color: transparent;
+        text-color: inherit;
+        highlight: inherit;
+        cursor: inherit;
+        vertical-align: 0.5;
+        horizontal-align: 0.0;
+      }
+    '';
   };
 
   environment.systemPackages = [
