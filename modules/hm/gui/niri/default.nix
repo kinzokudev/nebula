@@ -150,6 +150,8 @@
           "Mod+E".spawn = ["rofi" "-show" "emoji" "-theme" "~/.config/rofi/emoji.rasi"];
           "Mod+Q".spawn = ["rofi" "-show" "calc" "-theme" "~/.config/rofi/calc.rasi"];
           "Mod+Shift+Z".spawn = ["kitty" "pulsemixer"];
+          "Mod+N".spawn = ["dunstctl" "history-pop"];
+          "Mod+Shift+N".spawn = ["dunstctl" "close"];
           #|===|#
 
           #|===|#
