@@ -126,6 +126,8 @@
         disable-primary = [];
       };
 
+      spawn-at-startup = ["swww" "img" "~/Pictures/wallpapers/wallpaper_01.png"];
+
       overview = {
         zoom = 0.4;
       };
