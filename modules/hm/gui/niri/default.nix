@@ -145,7 +145,7 @@
         {
           #|===|#
           "Mod+Return".spawn = "kitty";
-          "Mod+P".spawn = ["rofi" "-show" "drun"];
+          "Mod+P".spawn = ["rofi" "-show" "drun" "-theme" "~/.config/rofi/drun.rasi"];
           "Mod+Shift+Z".spawn = ["kitty" "pulsemixer"];
           #|===|#
 

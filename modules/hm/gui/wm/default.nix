@@ -1,7 +1,7 @@
 {
   imports = [
     ./dunst.nix
-    ./niri.nix
+    # ./niri.nix
     # ./rofi.nix
   ];
 }
