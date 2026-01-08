@@ -146,6 +146,9 @@
           #|===|#
           "Mod+Return".spawn = "kitty";
           "Mod+P".spawn = ["rofi" "-show" "drun" "-theme" "~/.config/rofi/drun.rasi"];
+          "Mod+Shift+P".spawn = ["rofi" "-show" "run" "-theme" "~/.config/rofi/run.rasi"];
+          "Mod+E".spawn = ["rofi" "-show" "emoji" "-theme" "~/.config/rofi/emoji.rasi"];
+          "Mod+Q".spawn = ["rofi" "-show" "calc" "-theme" "~/.config/rofi/calc.rasi"];
           "Mod+Shift+Z".spawn = ["kitty" "pulsemixer"];
           #|===|#
 
@@ -156,7 +159,7 @@
           "Mod+Shift+R".switch-preset-window-height = [];
           "Mod+Ctrl+R".reset-window-height = [];
           "Mod+C".center-column = [];
-          "Mod+E".toggle-overview = [];
+          "Mod+Shift+Q".toggle-overview = [];
           "Mod+T".toggle-window-floating = [];
           "Mod+Tab".switch-focus-between-floating-and-tiling = [];
           "Mod+W".toggle-column-tabbed-display = [];
