@@ -141,6 +141,10 @@
           draw-border-with-background = false;
           open-maximized-to-edges = false;
         }
+        {
+          geometry-corner-radius = 8;
+          clip-to-geometry = true;
+        }
       ];
 
       binds =
