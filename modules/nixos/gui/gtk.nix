@@ -4,7 +4,6 @@
     font = {
       name = "JetBrainsMono Nerd Font";
       package = pkgs.nerd-fonts.jetbrains-mono;
-      size = 12;
     };
     cursorTheme = {
       name = "catppuccin-macchiato-lavender-cursors";
