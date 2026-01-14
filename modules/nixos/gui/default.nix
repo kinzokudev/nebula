@@ -3,6 +3,7 @@
     ./niri
     ./wm
     ./audacity.nix
+    ./deltachat.nix
     ./firefox.nix
     ./feishin.nix
     ./gimp.nix
