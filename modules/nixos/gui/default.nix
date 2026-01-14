@@ -17,6 +17,7 @@
     ./qbittorrent.nix
     ./r2modman.nix
     ./lmms.nix
+    ./mpv.nix
     ./nemo.nix
     ./sddm.nix
     ./signal.nix
