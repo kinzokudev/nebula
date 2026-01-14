@@ -23,8 +23,8 @@
   ];
 
   nix.settings = {
-    cores = 8;
-    max-jobs = 12;
+    cores = 6;
+    max-jobs = 4;
   };
 
   system.stateVersion = "24.11";
