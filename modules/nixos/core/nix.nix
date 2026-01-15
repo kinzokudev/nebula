@@ -30,13 +30,12 @@ in {
       nixpkgs-review
       nvfetcher
     ];
-
-    shellAliases = {
-      nfl = "nix flake lock";
-      nfu = "nix flake update";
-      nsh = "nix-shell --command fish -p";
-      nshp = "nix-shell --pure --command fish -p";
-    };
+  };
+  hm.home.shellAliases = {
+    nfl = "nix flake lock";
+    nfu = "nix flake update";
+    nsh = "nix-shell --command fish -p";
+    nshp = "nix-shell --pure --command fish -p";
   };
 
   custom.shell.packages = {

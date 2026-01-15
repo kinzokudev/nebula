@@ -117,31 +117,6 @@ in {
     };
   in {
     environment = {
-      shellAliases = {
-        ":e" = "nvim";
-        ":q" = "exit";
-        ":wq" = "exit";
-        c = "clear";
-        cat = "bat";
-        ccat = "command cat";
-        cp = "cp -ri";
-        crate = "cargo";
-        flake = "cd ${flakedir}";
-        isodate = ''date -u "+%Y-%m-%dT%H:%M:%SZ"'';
-        man = "batman";
-        mime = "xdg-mime query filetype";
-        mkdir = "mkdir -p";
-        mount = "mount --mkdir";
-        open = "xdg-open";
-        py = "python";
-        sl = "ls";
-        w = "watch -cn1 -x cat";
-
-        # cd aliases
-        ".." = "cd ..";
-        "..." = "cd ../..";
-      };
-
       systemPackages = with pkgs;
         [
           bonk # mkdir and touch in one
@@ -177,14 +152,40 @@ in {
         }
         // xdg-user-dirs;
     };
+    hm = {
+      home.shellAliases = {
+        ":e" = "nvim";
+        ":q" = "exit";
+        ":wq" = "exit";
+        c = "clear";
+        cat = "bat";
+        ccat = "command cat";
+        cp = "cp -ri";
+        crate = "cargo";
+        flake = "cd ${flakedir}";
+        isodate = ''date -u "+%Y-%m-%dT%H:%M:%SZ"'';
+        man = "batman";
+        mime = "xdg-mime query filetype";
+        mkdir = "mkdir -p";
+        mount = "mount --mkdir";
+        open = "xdg-open";
+        py = "python";
+        sl = "ls";
+        w = "watch -cn1 -x cat";
+        ff = "fastfetch";
 
-    hm.xdg.configFile = {
-      "user-dirs.conf".text = "enabled=False";
-      "user-dirs.dirs".text = let
-        # For some reason, these need to be wrapped with quotes to be valid.
-        wrapped = mapAttrs (_: value: ''"${value}"'') xdg-user-dirs;
-      in
-        lib.generators.toKeyValue {} wrapped;
+        # cd aliases
+        ".." = "cd ..";
+        "..." = "cd ../..";
+      };
+      xdg.configFile = {
+        "user-dirs.conf".text = "enabled=False";
+        "user-dirs.dirs".text = let
+          # For some reason, these need to be wrapped with quotes to be valid.
+          wrapped = mapAttrs (_: value: ''"${value}"'') xdg-user-dirs;
+        in
+          lib.generators.toKeyValue {} wrapped;
+      };
     };
 
     nixpkgs = {

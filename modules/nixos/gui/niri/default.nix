@@ -22,10 +22,10 @@
     withUWSM = true;
   };
 
+  hm.home.shellAliases = {
+    niri-log = ''journalctl --user -u niri --no-hostname -o cat | awk '{$1=""; print $0}' | sed 's/^ *//' | sed 's/\x1b[[0-9;]*m//g' '';
+  };
   environment = {
-    shellAliases = {
-      niri-log = ''journalctl --user -u niri --no-hostname -o cat | awk '{$1=""; print $0}' | sed 's/^ *//' | sed 's/\x1b[[0-9;]*m//g' '';
-    };
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
       ELECTRON_LAUNCH_FLAGS = "--enable-wayland-ime --wayland-text-input-version=3 --enable-features=WaylandLinuxDrmSyncobj";

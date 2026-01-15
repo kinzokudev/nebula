@@ -14,12 +14,6 @@
     };
   };
   config = lib.mkIf config.custom.fish.enable {
-    home.shellAliases = {
-      ".." = "cd ..";
-      cl = "clear";
-      cat = "bat";
-      ff = "fastfetch";
-    };
     programs.fish = {
       enable = true;
       shellAbbrs = config.home.shellAliases;
