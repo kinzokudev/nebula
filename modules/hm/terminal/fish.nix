@@ -143,6 +143,7 @@
                 command watch -x ${pkgs.fish}/bin/fish -c "$argv"
               end
             else
+            end
           '';
         };
       };
