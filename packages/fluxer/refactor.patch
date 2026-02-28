@@ -1,0 +1,33 @@
+diff --git a/electron-builder.config.cjs b/electron-builder.config.cjs
+index f8f8328..d15787b 100644
+--- a/electron-builder.config.cjs
++++ b/electron-builder.config.cjs
+@@ -145,12 +145,7 @@ module.exports = {
+ 				arch: ['x64', 'arm64'],
+ 			},
+ 		],
+-		desktop: {
+-			Name: productName,
+-			Comment: 'Instant messaging and VoIP application',
+-			Categories: 'Network;InstantMessaging;',
+-			StartupWMClass: isCanary ? 'fluxer-canary' : 'fluxer',
+-		},
++		desktop: null,
+ 	},
+
+ 	deb: {
+diff --git a/scripts/build.mjs b/scripts/build.mjs
+index 4ee9ac8..1c959e4 100644
+--- a/scripts/build.mjs
++++ b/scripts/build.mjs
+@@ -82,9 +82,6 @@ async function buildMain() {
+ 		define: {
+ 			'process.env.NODE_ENV': JSON.stringify(isProduction ? 'production' : 'development'),
+ 		},
+-		banner: {
+-			js: `import { createRequire } from 'module'; const require = createRequire(import.meta.url);`,
+-		},
+ 	});
+
+ 	console.log('Main process build complete.');
+

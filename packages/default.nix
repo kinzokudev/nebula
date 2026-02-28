@@ -6,4 +6,5 @@
   inherit (pkgs) callPackage;
 in {
   rofi-themes = callPackage ./rofi-themes {};
+  fluxer = callPackage ./fluxer {};
 }

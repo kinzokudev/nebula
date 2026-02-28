@@ -8,6 +8,7 @@
     ./firefox.nix
     ./element.nix
     ./feishin.nix
+    ./fluxer.nix
     ./gimp.nix
     ./gtk.nix
     ./inkscape.nix
