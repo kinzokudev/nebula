@@ -11,6 +11,7 @@
     ./fluxer.nix
     ./gimp.nix
     ./gtk.nix
+    ./hyfetch.nix
     ./inkscape.nix
     ./krita.nix
     ./libreoffice.nix
