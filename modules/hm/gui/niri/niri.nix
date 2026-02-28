@@ -31,6 +31,7 @@
           xkb = {
             layout = "us,us,ru";
             variant = ",intl,";
+            options = "grp:win_space_toggle";
           };
         };
         mouse = {
