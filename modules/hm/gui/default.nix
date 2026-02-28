@@ -3,5 +3,6 @@
     ./niri
     ./wm
     ./easyeffects.nix
+    ./zed.nix
   ];
 }
