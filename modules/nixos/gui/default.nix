@@ -5,15 +5,15 @@
     ./audacity.nix
     ./davinci-resolve.nix
     ./deltachat.nix
-    ./firefox.nix
     ./element.nix
     ./feishin.nix
+    ./firefox.nix
     ./fluxer.nix
     ./gimp.nix
     ./gtk.nix
     ./hyfetch.nix
     ./inkscape.nix
-    ./krita.nix
+    # ./krita.nix
     ./libreoffice.nix
     ./obsidian.nix
     ./plasma.nix
