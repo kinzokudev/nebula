@@ -9,16 +9,16 @@
     settings = {
       output = [
         {
-          _args = ["DP-2"];
-          mode = "1920x1080@164.834";
+          _args = ["DP-1"];
+          mode = "1920x1080@165.003";
           position._props = {
             x = 0;
             y = 0;
           };
         }
         {
-          _args = ["DP-1"];
-          mode = "1920x1080@165.003";
+          _args = ["HDMI-A-1"];
+          mode = "1920x1080@74.973";
           position._props = {
             x = 1920;
             y = 0;
