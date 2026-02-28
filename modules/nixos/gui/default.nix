@@ -6,6 +6,7 @@
     ./davinci-resolve.nix
     ./deltachat.nix
     ./firefox.nix
+    ./element.nix
     ./feishin.nix
     ./gimp.nix
     ./gtk.nix
