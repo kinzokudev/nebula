@@ -6,6 +6,8 @@
   electron_38,
   dart-sass,
   pnpm_10,
+  pnpmConfigHook,
+  fetchPnpmDeps,
   darwin,
   copyDesktopItems,
   makeDesktopItem,
@@ -28,10 +30,10 @@ in
 
     inherit src;
 
-    npmConfigHook = pnpm.configHook;
+    npmConfigHook = pnpmConfigHook;
 
     npmDeps = null;
-    pnpmDeps = pnpm.fetchDeps {
+    pnpmDeps = fetchPnpmDeps {
       inherit
         pname
         version
@@ -45,7 +47,10 @@ in
 
     nativeBuildInputs =
       lib.optionals (stdenv.hostPlatform.isLinux) [copyDesktopItems]
-      ++ lib.optionals stdenv.hostPlatform.isDarwin [darwin.autoSignDarwinBinariesHook];
+      ++ lib.optionals stdenv.hostPlatform.isDarwin [darwin.autoSignDarwinBinariesHook]
+      ++ [
+        pnpm
+      ];
 
     postPatch =
       ''
