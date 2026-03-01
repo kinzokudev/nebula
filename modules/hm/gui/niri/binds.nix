@@ -2,16 +2,12 @@
 in {
   #|===|#
   "Mod+Return".spawn = "kitty";
-  # "Mod+P".spawn = ["rofi" "-show" "drun" "-theme" "${config.xdg.configHome}/rofi/drun.rasi"];
   "Mod+P".spawn = ["dms" "ipc" "spotlight" "toggle"];
-  # "Mod+Shift+P".spawn = ["rofi" "-show" "run" "-theme" "${config.xdg.configHome}/rofi/run.rasi"];
   "Mod+E".spawn = ["rofi" "-show" "emoji" "-theme" "${config.xdg.configHome}/rofi/emoji.rasi"];
   "Mod+Q".spawn = ["rofi" "-show" "calc" "-theme" "${config.xdg.configHome}/rofi/calc.rasi"];
   "Mod+Shift+W".spawn = ["rofi" "-show" "window" "-theme" "${config.xdg.configHome}/rofi/window.rasi"];
-  # "Mod+V".spawn = ["rofi-clipboard-history"];
   "Mod+V".spawn = ["dms" "ipc" "clipboard" "toggle"];
   "Mod+Shift+Z".spawn = ["kitty" "pulsemixer"];
-  # "Mod+N".spawn = ["dunstctl" "history-pop"];
   "Mod+N".spawn = ["dms" "ipc" "notifications" "toggle"];
   "Mod+Shift+N".spawn = ["dms" "ipc" "notifications" "clearAll"];
   "Mod+Shift+X".spawn = ["dms" "ipc" "settings" "toggle"];
