@@ -10,6 +10,7 @@ in {
   "Mod+Shift+Z".spawn = ["kitty" "pulsemixer"];
   "Mod+N".spawn = ["dms" "ipc" "notifications" "toggle"];
   "Mod+Shift+N".spawn = ["dms" "ipc" "notifications" "clearAll"];
+  "Mod+Shift+D".spawn = ["dms" "ipc" "notifications" "toggleDoNotDisturb"];
   "Mod+Shift+X".spawn = ["dms" "ipc" "settings" "toggle"];
   "Mod+X".spawn = ["dms" "ipc" "notepad" "toggle"];
   "Mod+Alt+L".spawn = ["dms" "ipc" "lock" "lock"];
