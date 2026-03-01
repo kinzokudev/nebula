@@ -6,7 +6,7 @@
 }: let
   userinfo = {
     name = "kinzoku";
-    fullname = "Kira Rene";
+    fullname = "Kira";
     email = "kin@kinzoku.dev";
     timezone = "America/New_York";
     handles = {
