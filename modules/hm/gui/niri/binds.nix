@@ -1,15 +1,24 @@
-{config, ...}: {
+{config, ...}: let
+in {
   #|===|#
   "Mod+Return".spawn = "kitty";
-  "Mod+P".spawn = ["rofi" "-show" "drun" "-theme" "${config.xdg.configHome}/rofi/drun.rasi"];
-  "Mod+Shift+P".spawn = ["rofi" "-show" "run" "-theme" "${config.xdg.configHome}/rofi/run.rasi"];
+  # "Mod+P".spawn = ["rofi" "-show" "drun" "-theme" "${config.xdg.configHome}/rofi/drun.rasi"];
+  "Mod+P".spawn = ["dms" "ipc" "spotlight" "toggle"];
+  # "Mod+Shift+P".spawn = ["rofi" "-show" "run" "-theme" "${config.xdg.configHome}/rofi/run.rasi"];
   "Mod+E".spawn = ["rofi" "-show" "emoji" "-theme" "${config.xdg.configHome}/rofi/emoji.rasi"];
   "Mod+Q".spawn = ["rofi" "-show" "calc" "-theme" "${config.xdg.configHome}/rofi/calc.rasi"];
   "Mod+Shift+W".spawn = ["rofi" "-show" "window" "-theme" "${config.xdg.configHome}/rofi/window.rasi"];
-  "Mod+V".spawn = ["rofi-clipboard-history"];
+  # "Mod+V".spawn = ["rofi-clipboard-history"];
+  "Mod+V".spawn = ["dms" "ipc" "clipboard" "toggle"];
   "Mod+Shift+Z".spawn = ["kitty" "pulsemixer"];
-  "Mod+N".spawn = ["dunstctl" "history-pop"];
+  # "Mod+N".spawn = ["dunstctl" "history-pop"];
+  "Mod+N".spawn = ["dms" "ipc" "notifications" "toggle"];
   "Mod+Shift+N".spawn = ["dunstctl" "close"];
+  "Mod+Shift+X".spawn = ["dms" "ipc" "settings" "toggle"];
+  "Mod+X".spawn = ["dms" "ipc" "notepad" "toggle"];
+  "Mod+Alt+L".spawn = ["dms" "ipc" "lock" "lock"];
+  "Mod+Shift+P".spawn = ["dms" "ipc" "powermenu" "toggle"];
+  "Mod+M".spawn = ["dms" "ipc" "processlist" "toggle"];
   #|===|#
 
   #|===|#
@@ -67,12 +76,18 @@
   #|===|#
 
   #|===|#
-  "XF86AudioRaiseVolume".spawn = ["wpctl" "set-volume" "@DEFAULT_SINK@" "0.05+"];
-  "XF86AudioLowerVolume".spawn = ["wpctl" "set-volume" "@DEFAULT_SINK@" "0.05-"];
-  "XF86AudioMute".spawn = ["wpctl" "set-mute" "@DEFAULT_SINK@" "toggle"];
+  # "XF86AudioRaiseVolume".spawn = ["wpctl" "set-volume" "@DEFAULT_SINK@" "0.05+"];
+  # "XF86AudioLowerVolume".spawn = ["wpctl" "set-volume" "@DEFAULT_SINK@" "0.05-"];
+  # "XF86AudioMute".spawn = ["wpctl" "set-mute" "@DEFAULT_SINK@" "toggle"];
+  "XF86AudioRaiseVolume".spawn = ["dms" "ipc" "audio" "increment" "3"];
+  "XF86AudioLowerVolume".spawn = ["dms" "ipc" "audio" "decrement" "3"];
+  "XF86AudioMute".spawn = ["dms" "ipc" "audio" "mute"];
+  "XF86AudioMicMute".spawn = ["dms" "ipc" "audio" "micmute"];
+  "Mod+Shift+M".spawn = ["dms" "ipc" "audio" "micmute"];
   #
-  "XF86MonBrightnessUp".spawn = ["brightnessctl" "set" "5%+"];
-  "XF86MonBrightnessDown".spawn = ["brightnessctl" "set" "5%-"];
+  "XF86MonBrightnessUp".spawn = ["dms" "ipc" "brightness" "increment" "5" ""];
+  "XF86MonBrightnessDown".spawn = ["dms" "ipc" "brightness" "decrement" "5" ""];
+  "Mod+Alt+N".spawn = ["dms" "ipc" "night" "toggle"];
   #|===|#
 
   # "MouseForward".focus-workspace-up = [];
