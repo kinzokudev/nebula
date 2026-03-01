@@ -6,7 +6,7 @@
       settings = {
         main = {
           capslock = "overload(nav, esc)";
-          rightshift = "overload(nums, rightshift)";
+          rightshift = "overload(caps, rightshift)";
         };
         nav = {
           "h" = "left";
@@ -21,14 +21,14 @@
 
           "d" = "delete";
           "i" = "insert";
-        };
-        nums = {
+
           "1" = "6";
           "2" = "7";
           "3" = "8";
           "4" = "9";
           "5" = "0";
-
+        };
+        caps = {
           "capslock" = "capslock";
         };
       };
