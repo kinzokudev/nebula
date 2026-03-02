@@ -29,6 +29,8 @@
       url = "github:AvengeMedia/DankMaterialShell/stable";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    fluxer-nix.url = "github:ardishko/fluxer-nix";
   };
 
   outputs = inputs @ {

@@ -1,5 +1,9 @@
-{pkgs, ...}: {
+{
+  inputs,
+  pkgs,
+  ...
+}: {
   environment.systemPackages = [
-    pkgs.custom.fluxer
+    inputs.fluxer-nix.packages.${pkgs.system}.fluxer
   ];
 }
