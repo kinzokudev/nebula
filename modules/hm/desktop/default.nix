@@ -5,6 +5,5 @@
     ./kitty.nix
     ./mangohud.nix
     ./obs.nix
-    ./waybar.nix
   ];
 }
