@@ -16,6 +16,7 @@
     # ./krita.nix
     ./libreoffice.nix
     ./obsidian.nix
+    ./parabolic.nix
     ./plasma.nix
     ./prismlauncher.nix
     ./qbittorrent.nix
