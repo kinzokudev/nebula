@@ -148,7 +148,7 @@
       ];
 
       binds =
-        import ./binds.nix {inherit config;}
+        import ./binds.nix {inherit config lib pkgs;}
         // lib.genAttrs' (lib.genList lib.id 10) (x: lib.nameValuePair "Mod+${toString (lib.mod (x + 1) 10)}" {focus-workspace = x + 1;})
         // lib.genAttrs' (lib.genList lib.id 10) (x: lib.nameValuePair "Mod+Shift+${toString (lib.mod (x + 1) 10)}" {move-window-to-workspace = x + 1;});
     };
