@@ -1,7 +1,6 @@
 {
   imports = [
     ./home.nix
-    ./desktop
     ./gui
     ./terminal
   ];

@@ -50,19 +50,29 @@ in {
         key = "f";
       }
       {
-        cmd = "kitty pulsemixer";
-        desc = "Launch PulseMixer";
-        key = "s";
-      }
-      {
         cmd = "vesktop";
         desc = "Launch Discord";
         key = "d";
       }
       {
+        cmd = "fluxer";
+        desc = "Launch Fluxer";
+        key = "x";
+      }
+      {
+        cmd = "signal-desktop --password-store=\"kwallet6\"";
+        desc = "Launch Signal";
+        key = "s";
+      }
+      {
         cmd = "obs";
         desc = "Launch OBS Studio";
         key = "o";
+      }
+      {
+        cmd = "feishin";
+        desc = "Launch Feishin Music";
+        key = "m";
       }
     ]))
   ];
