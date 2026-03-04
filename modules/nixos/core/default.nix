@@ -1,16 +1,39 @@
-{
-  # automount disks
-  programs.dconf.enable = true;
-  services.gvfs.enable = true;
+{inputs, ...}: {
+  flake.nixosModules.core = {
+    config,
+    lib,
+    pkgs,
+    ...
+  }: let
+    inherit (lib) mapAttrsToList mkOption;
+    inherit (lib.types) attrsOf str;
+  in {
+    options.custom = {
+      symlinks = mkOption {
+        type = attrsOf str;
+        default = {};
+        description = "symlinks to create in the format { dest = src; }";
+      };
+    };
+    config = {
+      # automount disks
+      programs.dconf.enable = true;
+      services.gvfs.enable = true;
 
-  programs.fuse.userAllowOther = true;
+      programs.fuse.userAllowOther = true;
 
-  imports = [
-    ./auth.nix
-    ./boot.nix
-    ./configuration.nix
-    ./fonts.nix
-    ./nix.nix
-    ./users.nix
-  ];
+      # create symlink to dotfiles from /etc/nixos
+      # custom.symlinks = {
+      #   "/etc/nixos" = "${config.hm.home.homeDirectory}/Workspace/Code/nebula";
+      # };
+
+      # create symlinks
+      # systemd.tmpfiles.rules =
+      #   [
+      #     # cleanup systemd coredumps once a week
+      #     "D! /var/lib/systemd/coredump root root 7d"
+      #   ]
+      #   ++ (mapAttrsToList (dest: src: "L+ ${dest} - - - - ${src}") config.custom.symlinks);
+    };
+  };
 }

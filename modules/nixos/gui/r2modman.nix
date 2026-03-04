@@ -1,5 +1,7 @@
-{pkgs, ...}: {
-  environment.systemPackages = with pkgs; [
-    r2modman # Thunderstore mod manager
-  ];
+{
+  flake.nixosModules.gaming = {pkgs, ...}: {
+    environment.systemPackages = with pkgs; [
+      r2modman # Thunderstore mod manager
+    ];
+  };
 }

@@ -1,24 +1,25 @@
 {
-  pkgs,
-  userinfo,
-  ...
-}: {
-  users = {
-    defaultUserShell = pkgs.fish;
+  flake.nixosModules.core = {
+    pkgs,
+    userinfo,
+    ...
+  }: {
     users = {
-      ${userinfo.name} = {
-        isNormalUser = true;
-        description = "${userinfo.fullname}";
-        # Add user to groups
-        extraGroups = [
-          "networkmanager"
-          "wheel"
-          "disk"
-        ];
-        ignoreShellProgramCheck = true;
-      };
-      root = {
-        ignoreShellProgramCheck = true;
+      defaultUserShell = pkgs.fish;
+      users = {
+        root = {
+          ignoreShellProgramCheck = true;
+        };
+        ${userinfo.name} = {
+          isNormalUser = true;
+          description = "${userinfo.fullname}";
+          extraGroups = [
+            "networkmanager"
+            "wheel"
+            "disk"
+          ];
+          ignoreShellProgramCheck = true;
+        };
       };
     };
   };
