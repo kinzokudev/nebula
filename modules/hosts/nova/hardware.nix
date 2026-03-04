@@ -5,6 +5,7 @@
   flake.nixosModules.host-nova = {
     config,
     lib,
+    pkgs,
     ...
   }: {
     boot = {

@@ -1,6 +1,5 @@
-{
+{inputs, ...}: {
   flake.nixosModules.wm = {
-    inputs,
     pkgs,
     config,
     lib,
