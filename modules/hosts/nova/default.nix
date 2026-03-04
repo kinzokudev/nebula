@@ -2,9 +2,9 @@
   self,
   inputs,
   ...
-} @ top: {
+}: {
   flake.nixosModules.host-nova = {
-    imports = with top.config.flake.nixosModules; [
+    imports = with self.nixosModules; [
       gui
       wm
 

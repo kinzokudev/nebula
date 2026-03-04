@@ -1,6 +1,5 @@
-{
+{inputs, ...}: {
   flake.nixosModules.wm = {
-    inputs,
     pkgs,
     config,
     lib,
@@ -36,6 +35,9 @@
         MOZ_ENABLE_WAYLAND = "1";
         XDG_SESSION_TYPE = "wayland";
       };
+      systemPackages = [
+        pkgs.swww
+      ];
     };
     hm.wayland.windowManager.niri = {
       enable = true;
