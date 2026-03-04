@@ -1,5 +1,7 @@
-{pkgs, ...}: {
-  environment.systemPackages = with pkgs; [
-    thunderbird # E-Mail client
-  ];
+{
+  flake.nixosModules.gui = {pkgs, ...}: {
+    environment.systemPackages = with pkgs; [
+      thunderbird # E-Mail client
+    ];
+  };
 }

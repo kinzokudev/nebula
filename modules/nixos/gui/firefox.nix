@@ -1,6 +1,8 @@
 {
-  programs.firefox = {
-    # Enable Firefox browser
-    enable = true;
+  flake.nixosModules.gui = {
+    programs.firefox = {
+      # Enable Firefox browser
+      enable = true;
+    };
   };
 }
