@@ -24,15 +24,44 @@
 in {
   # DMS/ROFI
   "Mod+P".spawn = ["dms" "ipc" "spotlight" "toggle"];
-  "Mod+V".spawn = ["dms" "ipc" "clipboard" "toggle"];
   "Mod+N".spawn = ["dms" "ipc" "notifications" "toggle"];
   "Mod+Shift+N".spawn = ["dms" "ipc" "notifications" "clearAll"];
   "Mod+Shift+D".spawn = ["dms" "ipc" "notifications" "toggleDoNotDisturb"];
-  "Mod+Shift+X".spawn = ["dms" "ipc" "settings" "toggle"];
-  "Mod+X".spawn = ["dms" "ipc" "notepad" "toggle"];
-  "Mod+Alt+L".spawn = ["dms" "ipc" "lock" "lock"];
-  "Mod+Shift+P".spawn = ["dms" "ipc" "powermenu" "toggle"];
-  "Mod+M".spawn = ["dms" "ipc" "processlist" "toggle"];
+  "Mod+X".spawn = [
+    (lib.getExe (mkMenu [
+      {
+        cmd = "dms ipc settings toggle";
+        desc = "DMS Settings";
+        key = "s";
+      }
+      {
+        cmd = "dms ipc control-center toggle";
+        desc = "DMS Control Center";
+        key = "c";
+      }
+      {
+        cmd = "dms ipc clipboard toggle";
+        desc = "DMS Clipboard";
+        key = "x";
+      }
+      {
+        cmd = "dms ipc processlist toggle";
+        desc = "DMS Process List";
+        key = "m";
+      }
+      {
+        cmd = "dms ipc powermenu toggle";
+        desc = "DMS Power Menu";
+        key = "p";
+      }
+      {
+        cmd = "dms ipc lock lock";
+        desc = "Lock DMS";
+        key = "l";
+      }
+    ]))
+  ];
+  "Mod+Shift+X".spawn = ["dms" "ipc" "notepad" "toggle"];
   #
   "Mod+E".spawn = ["rofi" "-show" "emoji" "-theme" "${config.xdg.configHome}/rofi/emoji.rasi"];
   "Mod+Q".spawn = ["rofi" "-show" "calc" "-theme" "${config.xdg.configHome}/rofi/calc.rasi"];
@@ -41,7 +70,6 @@ in {
   # APPS
   "Mod+Return".spawn = "kitty";
   "Mod+Shift+Z".spawn = ["kitty" "pulsemixer"];
-  "Mod+Shift+F".spawn = ["firefox"];
   "Mod+D".spawn = [
     (lib.getExe (mkMenu [
       {
