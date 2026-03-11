@@ -8,6 +8,9 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    systems.url = "github:nix-systems/default";
+    import-tree.url = "github:vic/import-tree";
     #|===|#
 
     nix-gaming = {
@@ -33,18 +36,22 @@
     fluxer-nix.url = "github:ardishko/fluxer-nix";
   };
 
-  outputs = inputs @ {
-    self,
-    nixpkgs,
-    home-manager,
-    ...
-  }: let
-    inherit (self) outputs;
-    lib = nixpkgs.lib // home-manager.lib;
-  in {
-    inherit lib;
-    nixosConfigurations = import ./hosts.nix {
-      inherit lib inputs outputs;
+  outputs = inputs @ {flake-parts, ...}: let
+  in
+    flake-parts.lib.mkFlake {inherit inputs;}
+    (inputs.import-tree ./modules)
+    // {
+      imports = [
+        inputs.home-manager.flakeModules.home-manager
+      ];
     };
-  };
+  # let
+  #     inherit (self) outputs;
+  #     lib = nixpkgs.lib // home-manager.lib;
+  #   in {
+  #     inherit lib;
+  #     nixosConfigurations = import ./hosts.nix {
+  #       inherit lib inputs outputs;
+  #     };
+  #   }
 }

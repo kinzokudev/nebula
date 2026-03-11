@@ -1,177 +1,177 @@
-{
-  pkgs,
-  lib,
-  inputs,
-  userinfo,
-  config,
-  flakedir,
-  # self,
-  ...
-}: let
-  inherit
-    (lib)
-    concatStringsSep
-    mapAttrs
-    mapAttrsToList
-    mkOverride
-    sort
-    ;
-in {
-  environment = {
-    systemPackages = with pkgs; [
-      comma
-      nil
-      nix-init
-      nix-output-monitor
-      nix-tree
-      nix-update
-      nixd
-      nixfmt
-      nixpkgs-review
-      nvfetcher
-    ];
-  };
-  hm.home.shellAliases = {
-    nfl = "nix flake lock";
-    nfu = "nix flake update";
-    nsh = "nix-shell --command fish -p";
-    nshp = "nix-shell --pure --command fish -p";
-  };
-
-  custom.shell.packages = {
-    nv-update = {
-      runtimeInputs = [pkgs.nvfetcher];
-      text =
-        /*
-        sh
-        */
-        ''
-          pushd ${flakedir} > /dev/null
-          if [ "$#" -eq 0 ]; then
-            nvfetcher --keep-old
-          else
-            nvfetcher --keep-old --filter "$1"
-          fi
-          popd > /dev/null
-        '';
-    };
-  };
-
-  programs = {
-    nix-index.enable = true;
-
-    # run unpatched binaries on nixos
-    nix-ld.enable = true;
-  };
-
-  # execute shebangs that assume hardcoded shell paths
-  services.envfs.enable = true;
-  # system = {
-  #   # envfs sets usrbinenv activation script to "" with mkForce
-  #   activationScripts.usrbinenv = mkOverride (50 - 1) ''
-  #     if [ ! -d "/usr/bin" ]; then
-  #       mkdir -p /usr/bin
-  #       chmod 0755 /usr/bin
-  #     fi
-  #   '';
-  #
-  #   # make a symlink of flake within the generation (e.g. /run/current-system/src)
-  #   systemBuilderCommands = "ln -s ${self.sourceInfo.outPath} $out/src";
-  # };
-
-  nixpkgs.config = {
-    allowUnfree = true;
-    permittedInsecurePackages = [
-      "libsoup-2.74.3"
-    ];
-  };
-
-  nix = let
-    nixPath = mapAttrsToList (name: _: "${name}=flake:${name}") inputs;
-    registry = mapAttrs (_: flake: {inherit flake;}) inputs;
+{inputs, ...}: {
+  flake.nixosModules.core = {
+    pkgs,
+    lib,
+    userinfo,
+    config,
+    flakedir,
+    ...
+  }: let
+    inherit
+      (lib)
+      concatStringsSep
+      mapAttrs
+      mapAttrsToList
+      mkOverride
+      sort
+      ;
   in {
-    channel.enable = false;
-    # required for nix-shell -p to work
-    inherit nixPath;
-    gc = {
-      # automatic garbage collection
-      automatic = true;
-      dates = "daily";
-      options = "--delete-older-than 7d";
+    environment = {
+      systemPackages = with pkgs; [
+        comma
+        nil
+        nix-init
+        nix-output-monitor
+        nix-tree
+        nix-update
+        nixd
+        nixfmt
+        nixpkgs-review
+        nvfetcher
+      ];
     };
-    package = pkgs.nixVersions.latest;
-    registry =
-      registry
-      // {
-        n = registry.nixpkgs;
-        master = {
-          from = {
-            type = "indirect";
-            id = "nixpkgs-master";
-          };
-          to = {
-            type = "github";
-            owner = "NixOS";
-            repo = "nixpkgs";
+    hm.home.shellAliases = {
+      nfl = "nix flake lock";
+      nfu = "nix flake update";
+      nsh = "nix-shell --command fish -p";
+      nshp = "nix-shell --pure --command fish -p";
+    };
+
+    custom.shell.packages = {
+      nv-update = {
+        runtimeInputs = [pkgs.nvfetcher];
+        text =
+          /*
+          sh
+          */
+          ''
+            pushd ${flakedir} > /dev/null
+            if [ "$#" -eq 0 ]; then
+            nvfetcher --keep-old
+            else
+            nvfetcher --keep-old --filter "$1"
+            fi
+            popd > /dev/null
+          '';
+      };
+    };
+
+    programs = {
+      nix-index.enable = true;
+
+      # run unpatched binaries on nixos
+      nix-ld.enable = true;
+    };
+
+    # execute shebangs that assume hardcoded shell paths
+    services.envfs.enable = true;
+    # system = {
+    #   # envfs sets usrbinenv activation script to "" with mkForce
+    #   activationScripts.usrbinenv = mkOverride (50 - 1) ''
+    #     if [ ! -d "/usr/bin" ]; then
+    #       mkdir -p /usr/bin
+    #       chmod 0755 /usr/bin
+    #     fi
+    #   '';
+    #
+    #   # make a symlink of flake within the generation (e.g. /run/current-system/src)
+    #   systemBuilderCommands = "ln -s ${self.sourceInfo.outPath} $out/src";
+    # };
+
+    nixpkgs.config = {
+      allowUnfree = true;
+      permittedInsecurePackages = [
+        "libsoup-2.74.3"
+      ];
+    };
+
+    nix = let
+      nixPath = mapAttrsToList (name: _: "${name}=flake:${name}") inputs;
+      registry = mapAttrs (_: flake: {inherit flake;}) inputs;
+    in {
+      channel.enable = false;
+      # required for nix-shell -p to work
+      inherit nixPath;
+      gc = {
+        # automatic garbage collection
+        automatic = true;
+        dates = "daily";
+        options = "--delete-older-than 7d";
+      };
+      package = pkgs.nixVersions.latest;
+      registry =
+        registry
+        // {
+          n = registry.nixpkgs;
+          master = {
+            from = {
+              type = "indirect";
+              id = "nixpkgs-master";
+            };
+            to = {
+              type = "github";
+              owner = "NixOS";
+              repo = "nixpkgs";
+            };
           };
         };
+      settings = {
+        auto-optimise-store = true; # Optimise symlinks
+        # re-evaluate on every rebuild instead of "cached failure of attribute" error
+        # eval-cache = false;
+        flake-registry = ""; # don't use the global flake registry, define everything explicitly
+        # required to be set, for some reason nix.nixPath does not write to nix.conf
+        nix-path = nixPath;
+        warn-dirty = false;
+        # removes ~/.nix-profile and ~/.nix-defexpr
+        use-xdg-base-directories = true;
+
+        experimental-features = [
+          "nix-command" # use `nix` command
+          "flakes" # use flakes
+          "pipe-operators" # use experimental pipe operators `|>` and `<|`
+        ];
+        substituters = [
+          "https://hyprland.cachix.org"
+          "https://nix-community.cachix.org"
+          "https://niri-nix.cachix.org"
+        ];
+        # allow building and pushing of laptop config from desktop
+        trusted-users = [userinfo.name];
+        trusted-public-keys = [
+          "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+          "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+          "niri-nix.cachix.org-1:SvFtqpDcf7Sm1SMJdby1/+Y+6f3Yt3/3PMcSTKPJNJ0="
+        ];
       };
-    settings = {
-      auto-optimise-store = true; # Optimise symlinks
-      # re-evaluate on every rebuild instead of "cached failure of attribute" error
-      # eval-cache = false;
-      flake-registry = ""; # don't use the global flake registry, define everything explicitly
-      # required to be set, for some reason nix.nixPath does not write to nix.conf
-      nix-path = nixPath;
-      warn-dirty = false;
-      # removes ~/.nix-profile and ~/.nix-defexpr
-      use-xdg-base-directories = true;
-
-      experimental-features = [
-        "nix-command" # use `nix` command
-        "flakes" # use flakes
-        "pipe-operators" # use experimental pipe operators `|>` and `<|`
-      ];
-      substituters = [
-        "https://hyprland.cachix.org"
-        "https://nix-community.cachix.org"
-        "https://niri-nix.cachix.org"
-      ];
-      # allow building and pushing of laptop config from desktop
-      trusted-users = [userinfo.name];
-      trusted-public-keys = [
-        "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
-        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-        "niri-nix.cachix.org-1:SvFtqpDcf7Sm1SMJdby1/+Y+6f3Yt3/3PMcSTKPJNJ0="
-      ];
     };
+
+    # never going to read html docs locally
+    documentation = {
+      enable = true;
+      doc.enable = true;
+      man.enable = true;
+      dev.enable = false;
+    };
+
+    # enable man-db cache for fish to be able to find manpages
+    # https://discourse.nixos.org/t/fish-shell-and-manual-page-completion-nixos-home-manager/15661
+    documentation.man.cache.enable = true;
+
+    # system = {
+    #   # better nixos generation label
+    #   # https://reddit.com/r/NixOS/comments/16t2njf/small_trick_for_people_using_nixos_with_flakes/k2d0sxx/
+    #   nixos.label = concatStringsSep "-" (
+    #     (sort (x: y: x < y) config.system.nixos.tags)
+    #     ++ ["${config.system.nixos.version}.${self.sourceInfo.shortRev or "dirty"}"]
+    #   );
+    # };
+
+    systemd.tmpfiles.rules = [
+      # cleanup nixpkgs-review cache on boot
+      "D! ${config.hm.xdg.cacheHome}/nixpkgs-review 1755 ${userinfo.name} users 5d"
+      # cleanup channels so nix stops complaining
+      "D! /nix/var/nix/profiles/per-user/root 1755 root root 1d"
+    ];
   };
-
-  # never going to read html docs locally
-  documentation = {
-    enable = true;
-    doc.enable = true;
-    man.enable = true;
-    dev.enable = false;
-  };
-
-  # enable man-db cache for fish to be able to find manpages
-  # https://discourse.nixos.org/t/fish-shell-and-manual-page-completion-nixos-home-manager/15661
-  documentation.man.cache.enable = true;
-
-  # system = {
-  #   # better nixos generation label
-  #   # https://reddit.com/r/NixOS/comments/16t2njf/small_trick_for_people_using_nixos_with_flakes/k2d0sxx/
-  #   nixos.label = concatStringsSep "-" (
-  #     (sort (x: y: x < y) config.system.nixos.tags)
-  #     ++ ["${config.system.nixos.version}.${self.sourceInfo.shortRev or "dirty"}"]
-  #   );
-  # };
-
-  systemd.tmpfiles.rules = [
-    # cleanup nixpkgs-review cache on boot
-    "D! ${config.hm.xdg.cacheHome}/nixpkgs-review 1755 ${userinfo.name} users 5d"
-    # cleanup channels so nix stops complaining
-    "D! /nix/var/nix/profiles/per-user/root 1755 root root 1d"
-  ];
 }

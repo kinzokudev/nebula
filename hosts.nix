@@ -1,9 +1,10 @@
 {
-  lib,
   inputs,
-  outputs,
+  config,
+  self,
   ...
 }: let
+  inherit (inputs.nixpkgs) lib;
   userinfo = {
     name = "kinzoku";
     fullname = "Kira";
@@ -13,23 +14,29 @@
       github = "kinzokudev";
     };
   };
-  mkSystem = hostname:
+  mkHost = hostname: {
+    isVm ? false,
+    extraConfig ? {},
+  }:
     lib.nixosSystem {
-      system = "x86_64-linux";
       specialArgs = {
         inherit
           inputs
-          outputs
+          self
           userinfo
           hostname
+          isVm
           ;
+        isLaptop = hostname == "tempest";
         flakedir = "/home/${userinfo.name}/Workspace/Dev/nebula";
       };
       modules = [
-        ./hosts/${lib.toLower hostname}
-        ./modules
-        ./overlays
-        (lib.mkAliasOptionModule ["hm"] ["home-manager" "users" userinfo.name])
+        config.flake.nixosModules."host-${hostname}"
+
+        # ./hosts/${lib.toLower hostname}
+        # ./modules
+        # ./overlays
+        # (lib.mkAliasOptionModule ["hm"] ["home-manager" "users" userinfo.name])
       ];
     };
 in {

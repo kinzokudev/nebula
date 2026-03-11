@@ -1,5 +1,7 @@
-{pkgs, ...}: {
-  environment.systemPackages = [
-    pkgs.stoat-desktop
-  ];
+{
+  flake.nixosModules.chat = {pkgs, ...}: {
+    environment.systemPackages = [
+      pkgs.stoat-desktop
+    ];
+  };
 }
