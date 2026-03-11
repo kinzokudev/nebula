@@ -1,8 +1,4 @@
-{
-  self,
-  inputs,
-  ...
-}: {
+{self, ...}: {
   flake.nixosModules.host-nova = {
     imports = with self.nixosModules; [
       gui

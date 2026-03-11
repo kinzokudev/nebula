@@ -15,7 +15,7 @@
     boot = {
       extraModulePackages = [];
       supportedFilesystems = ["ntfs"];
-      kernelModules = ["kvm-amd"];
+      kernelModules = ["kvm-intel"];
       initrd = {
         availableKernelModules = [
           "xhci_pci"
@@ -25,7 +25,7 @@
           "usb_storage"
           "sd_mod"
         ];
-        kernelModules = ["amdgpu"];
+        kernelModules = [];
       };
     };
     fileSystems = {
@@ -41,21 +41,12 @@
           "dmask=0022"
         ];
       };
-
-      "/mnt/wd500" = {
-        device = "/dev/disk/by-label/WD500";
-        fsType = "ext4";
-      };
-      "/mnt/wd1000" = {
-        device = "/dev/disk/by-label/WD1000";
-        fsType = "ext4";
-      };
     };
 
     swapDevices = [
       {
         device = "/swapfile";
-        size = 16 * 1024;
+        size = 8 * 1024;
       }
     ];
 
@@ -68,6 +59,6 @@
     # networking.interfaces.wlp10s0.useDHCP = lib.mkDefault true;
 
     nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-    hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+    hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   };
 }
