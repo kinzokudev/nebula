@@ -56,6 +56,8 @@
               ${userinfo.name} = {
                 imports = [
                   inputs.niri-nix.homeModules.default
+                  inputs.dms.homeModules.dank-material-shell
+                  inputs.nixcord.homeModules.nixcord
                 ];
 
                 home = {

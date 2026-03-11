@@ -6,8 +6,13 @@
     config,
     lib,
     pkgs,
+    modulesPath,
     ...
   }: {
+    imports = [
+      (modulesPath + "/installer/scan/not-detected.nix")
+    ];
+
     boot = {
       extraModulePackages = [];
       supportedFilesystems = ["ntfs"];
