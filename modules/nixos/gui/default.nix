@@ -27,6 +27,7 @@
     ./sddm.nix
     ./signal.nix
     ./steam.nix
+    ./stoat.nix
     ./thunderbird.nix
     ./vlc.nix
   ];
