@@ -82,6 +82,7 @@
       allowUnfree = true;
       permittedInsecurePackages = [
         "libsoup-2.74.3"
+        "electron-38.8.4"
       ];
     };
 

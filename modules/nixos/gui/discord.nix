@@ -100,7 +100,7 @@
             logEdits = true;
             ignoreSelf = true;
           };
-          messageTags.enable = true;
+          # messageTags.enable = true;
           # mutualGroupDMs.enable = true;
           newGuildSettings.enable = true;
           noBlockedMessages = {

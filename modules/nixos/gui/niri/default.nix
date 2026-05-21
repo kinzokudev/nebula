@@ -11,16 +11,17 @@
 
     programs.niri = {
       enable = true;
-      package = pkgs.niri.overrideAttrs (o: {
-        # TAKEN FROM https://github.com/iynaix/dotfiles/blob/eccb2940f5885c52759f7c2ccead197d515332e4/modules/gui/niri/default.nix#L39-L49
-        patches =
-          (o.patches or [])
-          ++ [
-            # fix fullscreen windows have a black background
-            # https://github.com/YaLTeR/niri/discussions/1399#discussioncomment-12745734
-            ./transparent-fullscreen.patch # https://github.com/iynaix/dotfiles/blob/eccb2940f5885c52759f7c2ccead197d515332e4/modules/gui/niri/transparent-fullscreen.patch
-          ];
-      });
+      # package = pkgs.stable.niri.overrideAttrs (o: {
+      #   # TAKEN FROM https://github.com/iynaix/dotfiles/blob/eccb2940f5885c52759f7c2ccead197d515332e4/modules/gui/niri/default.nix#L39-L49
+      #   patches =
+      #     (o.patches or [])
+      #     ++ [
+      #       # fix fullscreen windows have a black background
+      #       # https://github.com/YaLTeR/niri/discussions/1399#discussioncomment-12745734
+      #       ./transparent-fullscreen.patch # https://github.com/iynaix/dotfiles/blob/eccb2940f5885c52759f7c2ccead197d515332e4/modules/gui/niri/transparent-fullscreen.patch
+      #     ];
+      # });
+      package = pkgs.niri;
       withUWSM = true;
     };
 
@@ -41,10 +42,10 @@
       settings = {
         output = [
           {
-            _args = ["DP-1"];
+            _args = ["DP-3"];
             mode = "1920x1080@165.003";
             position._props = {
-              x = 0;
+              x = 1920;
               y = 0;
             };
           }
@@ -52,7 +53,7 @@
             _args = ["HDMI-A-1"];
             mode = "1920x1080@74.973";
             position._props = {
-              x = 1920;
+              x = 0;
               y = 0;
             };
           }

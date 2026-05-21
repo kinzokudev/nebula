@@ -149,6 +149,9 @@
         "Mod+Shift+Ctrl+K".move-window-to-monitor-up = [];
         "Mod+Shift+Ctrl+L".move-window-to-monitor-right = [];
         #
+        "Mod+Alt+J".move-workspace-down = [];
+        "Mod+Alt+K".move-workspace-up = [];
+        #
         "Mod+A".focus-column-left-or-last = [];
         "Mod+S".focus-column-right-or-first = [];
         #

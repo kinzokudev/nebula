@@ -6,6 +6,7 @@
 
       chat
       lmms
+      reaper
       mullvad
       plasma
       gaming
@@ -15,6 +16,8 @@
       bluetooth
       keyd
       openrgb
+
+      godot
     ];
     networking.nameservers = [
       "1.1.1.1"
